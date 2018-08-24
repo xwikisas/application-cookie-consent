@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc version="1.3" reference="CookieConsent.Translation" locale="fr">
+  <web>CookieConsent</web>
+  <name>Translation</name>
+  <language>fr</language>
+  <defaultLanguage>en</defaultLanguage>
+  <translation>1</translation>
+  <creator>xwiki:XWiki.Admin</creator>
+  <creationDate>1531379754000</creationDate>
+  <parent>CookieConsent.WebHome</parent>
+  <author>xwiki:XWiki.Admin</author>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <date>1531379754000</date>
+  <contentUpdateDate>1531379754000</contentUpdateDate>
+  <version>1.1</version>
+  <title/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>true</hidden>
+  <content>## Configuration translation ##
+CookieConsentCode.ConfigurationClass_active=Actif
+CookieConsentCode.ConfigurationClass_active_0=non
+CookieConsentCode.ConfigurationClass_active_1=oui
+CookieConsentCode.ConfigurationClass_type=Type
+CookieConsentCode.ConfigurationClass_type_bar=barre
+CookieConsentCode.ConfigurationClass_type_box=boîte
+CookieConsentCode.ConfigurationClass_position=Position
+CookieConsentCode.ConfigurationClass_position_top=haut
+CookieConsentCode.ConfigurationClass_position_bottom=bas
+CookieConsentCode.ConfigurationClass_animation=Animation
+CookieConsentCode.ConfigurationClass_animation_none=aucun
+CookieConsentCode.ConfigurationClass_animation_slide=glissement
+CookieConsentCode.ConfigurationClass_animation_fade=flétrir
+CookieConsentCode.ConfigurationClass_backgroundColor=Couleur de fond
+CookieConsentCode.ConfigurationClass_foregroundColor=La couleur du texte
+CookieConsentCode.ConfigurationClass_opacity=Opacité
+CookieConsentCode.ConfigurationClass_buttonText=Étiquette du bouton
+CookieConsentCode.ConfigurationClass_configButtonText=Étiquette du configuration bouton
+CookieConsentCode.ConfigurationClass_disclaimer1=Désistement 1
+CookieConsentCode.ConfigurationClass_disclaimer2=Désistement 2
+CookieConsentCode.ConfigurationClass_necessaryInfoBox=Nécessaire Info Box
+CookieConsentCode.ConfigurationClass_preferencesInfoBox=Préférences Info Box
+CookieConsentCode.ConfigurationClass_statisticsInfoBox=Statistiques Info Box
+CookieConsentCode.ConfigurationClass_marketingInfoBox=Marketing Info Box
+CookieConsentCode.ConfigurationClass_preferencesScripts=Scripts de Préférences
+CookieConsentCode.ConfigurationClass_statisticsScripts=Scripts de Statistiques
+CookieConsentCode.ConfigurationClass_marketingScripts=Scripts de Marketing
+CookieConsentCode.ConfigurationClass_necessaryLabel=Modifier l'étiquette "nécessaire"
+CookieConsentCode.ConfigurationClass_preferencesLabel=Modifier l'étiquette "préférences"
+CookieConsentCode.ConfigurationClass_statisticsLabel=Modifier l'étiquette "statistiques"
+CookieConsentCode.ConfigurationClass_marketingLabel=Modifier l'étiquette "Marketing"
+
+## Disclaimer ##
+cookieConsent.configure.title.mandatory=Nécessaire
+cookieConsent.configure.title.preferences=Préférences
+cookieConsent.configure.title.statistics=Statistiques
+cookieConsent.configure.title.marketing=Marketing
+cookieConsent.crtUser.hasAccepted=Cookies actuels acceptés par l'utilisateur
+
+## Administration ##
+cookieConsent.administration.heading=Extension de consentement aux cookies conforme au RGPD
+cookieConsent.administration.description.intro=Cette extension vous permet de configurer un panneau de consentement conforme au RGPD pour les cookies et trackers sur votre site. Cela vous donnera la possibilité de demander le consentement de votre visiteur pour activer ou non l'utilisation de cookies ou de trackers selon les différents types d'outils :
+cookieConsent.administration.description.necessary=nécessaires: les cookies nécessaires à la fonctionnalité du site Web, qui sont obligatoires et ne peuvent pas être désactivés
+cookieConsent.administration.description.preferences=préférences: les cookies ou trackers de préférences sont optionnels et activés par défaut mais utilisés uniquement pour enregistrer vos préférences
+cookieConsent.administration.description.statistics=statistiques: les cookies ou trackers statistiques qui sont optionnels et activés par défaut et utilisés pour enregistrer des statistiques anonymes
+cookieConsent.administration.description.marketing=marketing: les cookies de marketing ou autres cookies ou trackers connexes sont optionnels et désactivés par défaut et peuvent enregistrer des informations personnelles
+cookieConsent.administration.heading.general=Général
+cookieConsent.administration.heading.configurableText=Texte à configurer
+cookieConsent.administration.heading.trackers=Trackers et scripts
+cookieConsent.administration.heading.labels=Personnaliser les libellés</content>
+</xwikidoc>
