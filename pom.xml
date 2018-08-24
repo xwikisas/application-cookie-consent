@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!--
- *
  * See the NOTICE file distributed with this work for additional
  * information regarding copyright ownership.
  *
@@ -18,68 +18,55 @@
  * License along with this software; if not, write to the Free
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
- *
 -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.xwiki.commons</groupId>
-    <artifactId>xwiki-commons-pom</artifactId>
-    <version>6.4</version>
+    <groupId>com.xwiki.parent</groupId>
+    <artifactId>xwikisas-parent-platform</artifactId>
+    <version>8.4-12</version>
   </parent>
-
-  <groupId>org.xwiki.contrib</groupId>
+  <groupId>com.xwiki.cookie-consent</groupId>
   <artifactId>application-cookie-consent</artifactId>
   <name>GDPR Cookie Consent</name>
   <version>1.0-SNAPSHOT</version>
   <packaging>xar</packaging>
-  <description>Cookei consent popup with different configuration options.</description>
+  <description>Cookie consent popup with different configuration options.</description>
   <properties>
     <xwiki.version>6.4</xwiki.version>
     <!-- Name to display by the Extension Manager -->
     <xwiki.extension.name>GDPR Cookie Consent</xwiki.extension.name>
     <!-- Sets value for the categories column on e.x.o -->
     <xwiki.extension.category>application</xwiki.extension.category>
+    <!-- Don't run CLIRR here since there's no Java code. -->
+    <xwiki.clirr.skip>true</xwiki.clirr.skip>
   </properties>
+  <issueManagement>
+    <system>GitHub</system>
+    <url>https://github.com/xwikisas/application-cookie-consent/issues</url>
+  </issueManagement>
   <scm>
     <connection>scm:git:git://github.com/xwikisas/application-cookie-consent.git</connection>
     <developerConnection>scm:git:git@github.com:xwikisas/application-cookie-consent.git</developerConnection>
-    <url>https://github.com/xwikisas/application-cookei-consent</url>
+    <url>https://github.com/xwikisas/application-cookie-consent</url>
     <tag>HEAD</tag>
   </scm>
-  <distributionManagement>
+  <!-- Even though this repository is already declared in the parent POM, we still explicitly redeclare it for
+       convenience. This makes it simpler to build this project without having to declare this repository in one's own
+       Maven settings.xml file. In the future We may decide to remove this in the future and make it a rule to have the
+       XWiki SAS Nexus repository in one's settings.xml -->
+  <repositories>
     <repository>
-      <id>xwiki-staging</id>
-      <name>XWiki Staging Repository</name>
-      <url>http://nexus.xwiki.org/nexus/service/local/staging/deploy/maven2/</url>
+      <id>public-store-releases</id>
+      <name>XWiki SAS Public Store Repository for Releases</name>
+      <url>https://nexus.xwiki.com/nexus/content/repositories/public-store-releases/</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots> 
     </repository>
-  </distributionManagement>
-  <build>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-release-plugin</artifactId>
-          <!-- Try releasing with release plugin 2.5 since it has failed with the lastest
-               (seems there are a couple of bugs) -->
-          <version>2.5</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-    <extensions>
-      <extension>
-        <groupId>org.xwiki.commons</groupId>
-        <artifactId>xwiki-commons-tool-xar-handlers</artifactId>
-        <version>${commons.version}</version>
-      </extension>
-    </extensions>
-    <plugins>
-      <plugin>
-        <groupId>org.xwiki.commons</groupId>
-        <artifactId>xwiki-commons-tool-xar-plugin</artifactId>
-        <version>${commons.version}</version>
-      </plugin>
-    </plugins>
-  </build>
+  </repositories>
 </project>
