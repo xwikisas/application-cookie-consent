@@ -28,11 +28,11 @@
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1531379637000</creationDate>
-  <parent>en:CookieConsent.WebHome</parent>
+  <parent>CookieConsent.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1533211063000</date>
-  <contentUpdateDate>1533211063000</contentUpdateDate>
+  <date>1536221880000</date>
+  <contentUpdateDate>1536221880000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -58,11 +58,13 @@ $xwiki.jsx.use('CookieConsent.ConfigurationSheet')
 ; $services.localization.render('cookieConsent.crtUser.hasAccepted')
 : {{gdprSettings /}}
 
-==== Trigger pop-up manually ====
+==== $services.localization.render('cookieConsent.administration.trigger.heading') ====
 
-  For creating a link/button to open the cookie pop-up manually all it takes is to add the id **ResetCookies** to the clickable element, for example:
+  $services.localization.render('cookieConsent.administration.trigger.content')
 
-  {{code}}&lt;a href="#" id='ResetCookies'&gt;Cookie options&lt;/a&gt;{{/code}}
+  {{code}}{{html}}&lt;a href="#" id='ResetCookies'&gt;$services.localization.render('cookieConsent.administration.trigger.linklabel')&lt;/a&gt;{{/html}}{{/code}}
+
+  Preview: {{html}}&lt;a href="#" id='ResetCookies'&gt;$services.localization.render('cookieConsent.administration.trigger.linklabel')&lt;/a&gt;{{/html}}
 
 {{/velocity}}</content>
   <object>

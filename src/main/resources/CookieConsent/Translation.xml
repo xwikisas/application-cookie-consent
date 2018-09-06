@@ -31,8 +31,8 @@
   <parent>CookieConsent.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1531395504000</date>
-  <contentUpdateDate>1531395125000</contentUpdateDate>
+  <date>1536222072000</date>
+  <contentUpdateDate>1536222072000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -81,6 +81,8 @@ cookieConsent.configure.title.marketing=Marketing
 cookieConsent.crtUser.hasAccepted=Current user accepted cookies
 
 ## Administration ##
+
+cookieConsent.administration.applications=GDPR Cookie Consent
 cookieConsent.administration.heading=GDPR Cookie Consent Setup
 cookieConsent.administration.description.intro=This extension allows to setup a GDPR compatible consent screen for cookies and trackers. This will allow you to ask for your user's consent to activate or not the usage of cookies or trackers depending on different types of tools:
 cookieConsent.administration.description.necessary=necessary: necessary cookies which are mandatory and cannot be disabled
@@ -90,7 +92,12 @@ cookieConsent.administration.description.marketing=marketing: marketing or other
 cookieConsent.administration.heading.general=General
 cookieConsent.administration.heading.configurableText=Configurable Text
 cookieConsent.administration.heading.trackers=Trackers and scripts
-cookieConsent.administration.heading.labels=Customize labels</content>
+cookieConsent.administration.heading.labels=Customize labels
+cookieConsent.administration.trigger.heading=Trigger pop-up manually
+cookieConsent.administration.trigger.content=For creating a link/button to open the cookie pop-up manually all it takes is to add the id **ResetCookies** to the clickable element, for example:
+cookieConsent.administration.trigger.linklabel=Cookie options
+cookieConsent.administration.info.param=The parameter should be **preferences**, **statistics** or **marketing**.
+cookieConsent.administration.info.notaccepted=The current user has not yet accepted the cookie policy</content>
   <object>
     <name>CookieConsent.Translation</name>
     <number>0</number>

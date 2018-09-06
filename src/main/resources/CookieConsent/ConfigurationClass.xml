@@ -28,11 +28,11 @@
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1531379578000</creationDate>
-  <parent>en:CookieConsent.WebHome</parent>
+  <parent>CookieConsent.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1531379597000</date>
-  <contentUpdateDate>1531379578000</contentUpdateDate>
+  <date>1536219001000</date>
+  <contentUpdateDate>1536219001000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -133,13 +133,13 @@
       <contenttype>---</contenttype>
       <customDisplay/>
       <disabled>0</disabled>
-      <editor>Wysiwyg</editor>
+      <editor>PureText</editor>
       <name>disclaimer1</name>
       <number>10</number>
       <picker>0</picker>
       <prettyName>disclaimer1</prettyName>
       <rows>5</rows>
-      <size>40</size>
+      <size>120</size>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
       <validationRegExp/>
@@ -149,13 +149,13 @@
       <contenttype>---</contenttype>
       <customDisplay/>
       <disabled>0</disabled>
-      <editor>Wysiwyg</editor>
+      <editor>PureText</editor>
       <name>disclaimer2</name>
       <number>11</number>
       <picker>0</picker>
       <prettyName>disclaimer2</prettyName>
       <rows>5</rows>
-      <size>40</size>
+      <size>120</size>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
       <validationRegExp/>
@@ -184,7 +184,7 @@
       <picker>0</picker>
       <prettyName>marketingInfoBox</prettyName>
       <rows>5</rows>
-      <size>40</size>
+      <size>120</size>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
       <validationRegExp/>
@@ -204,6 +204,7 @@
       <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
     </marketingLabel>
     <marketingScripts>
+      <contenttype>---</contenttype>
       <customDisplay/>
       <disabled>0</disabled>
       <editor>PureText</editor>
@@ -212,7 +213,7 @@
       <picker>0</picker>
       <prettyName>marketingScripts</prettyName>
       <rows>5</rows>
-      <size>40</size>
+      <size>120</size>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
       <validationRegExp/>
@@ -228,7 +229,7 @@
       <picker>0</picker>
       <prettyName>necessaryInfoBox</prettyName>
       <rows>5</rows>
-      <size>40</size>
+      <size>120</size>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
       <validationRegExp/>
@@ -299,7 +300,7 @@
       <picker>0</picker>
       <prettyName>preferencesInfoBox</prettyName>
       <rows>5</rows>
-      <size>40</size>
+      <size>120</size>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
       <validationRegExp/>
@@ -319,6 +320,7 @@
       <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
     </preferencesLabel>
     <preferencesScripts>
+      <contenttype>---</contenttype>
       <customDisplay/>
       <disabled>0</disabled>
       <editor>PureText</editor>
@@ -327,7 +329,7 @@
       <picker>0</picker>
       <prettyName>preferencesScripts</prettyName>
       <rows>5</rows>
-      <size>40</size>
+      <size>120</size>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
       <validationRegExp/>
@@ -343,7 +345,7 @@
       <picker>0</picker>
       <prettyName>statisticsInfoBox</prettyName>
       <rows>5</rows>
-      <size>40</size>
+      <size>120</size>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
       <validationRegExp/>
@@ -363,6 +365,7 @@
       <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
     </statisticsLabel>
     <statisticsScripts>
+      <contenttype>---</contenttype>
       <customDisplay/>
       <disabled>0</disabled>
       <editor>PureText</editor>
@@ -371,7 +374,7 @@
       <picker>0</picker>
       <prettyName>statisticsScripts</prettyName>
       <rows>5</rows>
-      <size>40</size>
+      <size>120</size>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
       <validationRegExp/>
