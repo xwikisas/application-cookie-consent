@@ -161,6 +161,9 @@
       <allow>1</allow>
     </property>
     <property>
+      <groups>XWiki.XWikiAllGroup,</groups>
+    </property>
+    <property>
       <levels>view</levels>
     </property>
     <property>
