@@ -471,7 +471,7 @@
       <statisticsScripts/>
     </property>
     <property>
-      <type>box</type>
+      <type>bar</type>
     </property>
   </object>
   <object>
