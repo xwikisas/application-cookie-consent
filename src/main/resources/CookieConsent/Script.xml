@@ -129,9 +129,12 @@
     if(!this.getCookie('cookieConsent')){
       this.showDisclaimer();
     }
-    $('ResetCookies').observe('click', function() {
-      this.showDisclaimer();
-    }.bind(this));
+    var resetCookiesButton = $('ResetCookies');
+    if (resetCookiesButton != null) {
+      resetCookiesButton.observe('click', function() {
+        this.showDisclaimer();
+      }.bind(this));
+    }
   },
 
   getCookie : function(key)
