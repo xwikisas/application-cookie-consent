@@ -30,7 +30,7 @@
   <groupId>com.xwiki.cookie-consent</groupId>
   <artifactId>application-cookie-consent</artifactId>
   <name>GDPR Cookie Consent</name>
-  <version>1.3-SNAPSHOT</version>
+  <version>1.2.1</version>
   <packaging>xar</packaging>
   <description>Cookie consent popup with different configuration options.</description>
   <properties>
@@ -50,7 +50,7 @@
     <connection>scm:git:git://github.com/xwikisas/application-cookie-consent.git</connection>
     <developerConnection>scm:git:git@github.com:xwikisas/application-cookie-consent.git</developerConnection>
     <url>https://github.com/xwikisas/application-cookie-consent</url>
-    <tag>HEAD</tag>
+    <tag>application-cookie-consent-1.2.1</tag>
   </scm>
   <!-- Even though this repository is already declared in the parent POM, we still explicitly redeclare it for
        convenience. This makes it simpler to build this project without having to declare this repository in one's own
