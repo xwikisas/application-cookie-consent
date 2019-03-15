@@ -114,10 +114,15 @@
     </class>
     <property>
       <content>{{velocity}}
-#includeInContext("CookieConsent.gdprMacros")
-{{html}}
-$insertScripts
-{{/html}}
+#if ($services.security.authorization.hasAccess('view'))
+  {{include reference="CookieConsent.gdprMacros"/}}
+#end
+{{/velocity}}
+
+{{velocity}}
+#if ($services.security.authorization.hasAccess('view'))
+  #insertScripts
+#end
 {{/velocity}}</content>
     </property>
     <property>
