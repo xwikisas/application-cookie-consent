@@ -114,13 +114,15 @@
     </class>
     <property>
       <content>{{velocity}}
-#if ($services.security.authorization.hasAccess('view'))
-  {{include reference="CookieConsent.gdprMacros"/}}
+#set ($gdprMacrosReference = $services.model.resolveDocument('CookieConsent.gdprMacros'))
+#set ($hasMacrosView = $services.security.authorization.hasAccess('view', $xcontext.userReference, $gdprMacrosReference))
+#if ($hasMacrosView)
+  {{include reference="$gdprMacrosReference"/}}
 #end
 {{/velocity}}
 
 {{velocity}}
-#if ($services.security.authorization.hasAccess('view'))
+#if ($hasMacrosView)
   #insertScripts
 #end
 {{/velocity}}</content>
