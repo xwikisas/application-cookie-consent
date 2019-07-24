@@ -49,7 +49,7 @@
   <scm>
     <connection>scm:git:git://github.com/xwikisas/application-cookie-consent.git</connection>
     <developerConnection>scm:git:git@github.com:xwikisas/application-cookie-consent.git</developerConnection>
-    <url>https://github.com/xwikisas/application-cookie-consent</url>
+    <url>https://github.com/xwikisas/application-cookie-consent/tree/master</url>
     <tag>HEAD</tag>
   </scm>
   <!-- Even though this repository is already declared in the parent POM, we still explicitly redeclare it for
