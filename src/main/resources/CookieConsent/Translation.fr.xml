@@ -27,12 +27,12 @@
   <defaultLanguage>en</defaultLanguage>
   <translation>1</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1531379754000</creationDate>
+  <creationDate>1589190679000</creationDate>
   <parent>CookieConsent.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1536222113000</date>
-  <contentUpdateDate>1536222113000</contentUpdateDate>
+  <date>1589191202000</date>
+  <contentUpdateDate>1589191202000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -94,7 +94,8 @@ cookieConsent.administration.heading.labels=Personnaliser les libellés
 cookieConsent.administration.trigger.heading=Déclencher pop-up manuellement
 cookieConsent.administration.trigger.content=Afin de créer un lien/bouton pour ouvrir le pop-up cookie manuellement, il suffit d’ajouter l’identifiant
 ResetCookies à l’élément clicable. Par exemple:
-cookieConsent.administration.trigger.linklabel=Options Cookie
+cookieConsent.administration.trigger.example=Exemple
+cookieConsent.administration.trigger.linklabel=Réinitialiser les options de cookies
 cookieConsent.administration.info.param=Le paramètre doit être **preferences**, **statistics** or **marketing**.
 cookieConsent.administration.info.notaccepted=L’utilisateur actuel n’a pas encore accepté les règles spécifiques pour les cookies.</content>
 </xwikidoc>

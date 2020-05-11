@@ -27,12 +27,12 @@
   <defaultLanguage>en</defaultLanguage>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1531379754000</creationDate>
+  <creationDate>1589190679000</creationDate>
   <parent>CookieConsent.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1536222072000</date>
-  <contentUpdateDate>1536222072000</contentUpdateDate>
+  <date>1589191178000</date>
+  <contentUpdateDate>1589191178000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -95,7 +95,8 @@ cookieConsent.administration.heading.trackers=Trackers and scripts
 cookieConsent.administration.heading.labels=Customize labels
 cookieConsent.administration.trigger.heading=Trigger pop-up manually
 cookieConsent.administration.trigger.content=For creating a link/button to open the cookie pop-up manually all it takes is to add the id **ResetCookies** to the clickable element, for example:
-cookieConsent.administration.trigger.linklabel=Cookie options
+cookieConsent.administration.trigger.example=Example
+cookieConsent.administration.trigger.linklabel=Reset cookie options
 cookieConsent.administration.info.param=The parameter should be **preferences**, **statistics** or **marketing**.
 cookieConsent.administration.info.notaccepted=The current user has not yet accepted the cookie policy</content>
   <object>
@@ -116,6 +117,8 @@ cookieConsent.administration.info.notaccepted=The current user has not yet accep
         <cache>0</cache>
         <disabled>0</disabled>
         <displayType>select</displayType>
+        <freeText>forbidden</freeText>
+        <largeStorage>0</largeStorage>
         <multiSelect>0</multiSelect>
         <name>scope</name>
         <number>1</number>
