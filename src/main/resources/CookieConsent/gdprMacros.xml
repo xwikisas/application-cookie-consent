@@ -31,8 +31,8 @@
   <parent>CookieConsent.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1536219001000</date>
-  <contentUpdateDate>1536219001000</contentUpdateDate>
+  <date>1588238634000</date>
+  <contentUpdateDate>1588238634000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -71,7 +71,7 @@
   #set($hasStatistics = "#gdprHas('statistics')")
   #set($hasMarketing = "#gdprHas('marketing')")
   #set($cookieSetupDoc = $xwiki.getDocument('CookieConsent.WebHome'))
-  #set($setupObject = $cookieSetupDoc.getObject('CookieConsent.ConfigurationClass'))
+  #set($setupObject = $cookieSetupDoc.getObject('CookieConsent.ConfigurationClass','lang',$xcontext.language))
   #set($preferencesScripts = $setupObject.getProperty('preferencesScripts').value)
   #set($statisticsScripts = $setupObject.getProperty('statisticsScripts').value)
   #set($marketingScripts = $setupObject.getProperty('marketingScripts').value)
