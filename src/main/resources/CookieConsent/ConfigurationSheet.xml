@@ -40,21 +40,13 @@
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
   <content>{{velocity}}
+#set ($settingsDoc = $xwiki.getDocument('CookieConsent.WebHome'))
 $services.localization.render('cookieConsent.administration.description.intro')
 * $services.localization.render('cookieConsent.administration.description.necessary')
 * $services.localization.render('cookieConsent.administration.description.preferences')
 * $services.localization.render('cookieConsent.administration.description.statistics')
 * $services.localization.render('cookieConsent.administration.description.marketing')
 
-$xwiki.jsfx.use('uicomponents/widgets/colorpicker/procolor.js', true)
-$xwiki.jsx.use('CookieConsent.ConfigurationSheet')
-#set ($discard = $services.localization.use('document', 'CookieConsent.Translation'))
-##
-#set($class = $doc.getObject('CookieConsent.ConfigurationClass').xWikiClass)
-#foreach($property in $class.properties)
- ; $property.translatedPrettyName
- : $doc.display($property.getName())
-#end
 ; $services.localization.render('cookieConsent.crtUser.hasAccepted')
 : {{gdprSettings /}}
 
@@ -64,8 +56,104 @@ $xwiki.jsx.use('CookieConsent.ConfigurationSheet')
 
   {{code}}{{html}}&lt;a href="#" id='ResetCookies'&gt;$services.localization.render('cookieConsent.administration.trigger.linklabel')&lt;/a&gt;{{/html}}{{/code}}
 
-  Preview: {{html}}&lt;a href="#" id='ResetCookies'&gt;$services.localization.render('cookieConsent.administration.trigger.linklabel')&lt;/a&gt;{{/html}}
+  **$services.localization.render('cookieConsent.administration.trigger.example'):** {{html}}&lt;a href="#" id='ResetCookies'&gt;$services.localization.render('cookieConsent.administration.trigger.linklabel')&lt;/a&gt;{{/html}}##
+$xwiki.jsfx.use('uicomponents/widgets/colorpicker/procolor.js', true)
+$xwiki.jsx.use('CookieConsent.ConfigurationSheet')
+#set ($discard = $services.localization.use('document', 'CookieConsent.Translation'))
+#if($hasAdmin)
+  ####
+  ##Language objects management start
+  ##
+  #set ($defaultLanguage = $xwiki.getDocument('XWiki.XWikiPreferences').getObject('XWiki.XWikiPreferences').getProperty('default_language').value)
+  #set ($supportedLang = $xwiki.getDocument('XWiki.XWikiPreferences').getObject('XWiki.XWikiPreferences').getProperty('languages').value)
+  ##
+  #set ($settingsDocObjects = $settingsDoc.getObjects('CookieConsent.ConfigurationClass'))
+  #set ($crtLangObject = $settingsDoc.getObject('CookieConsent.ConfigurationClass','lang',$xcontext.language))
+  #if($settingsDocObjects.size() == 1 &amp;&amp; "$!{crtLangObject}" == '')
+    #set ($obj = $settingsDoc.getObject('CookieConsent.ConfigurationClass'))
+    #set ($discard = $obj.set('lang',$xcontext.language))
+    #set ($discard = $settingsDoc.save())
+  #end
+  #if($settingsDocObjects.size() &lt; $supportedLang.split(',').size())
+    #foreach($lang in $supportedLang.split(','))
+      #set ($originalObject = $settingsDoc.getObject('CookieConsent.ConfigurationClass','lang',$defaultLanguage))
+      #set ($langObject = $settingsDoc.getObject('CookieConsent.ConfigurationClass','lang',$lang))
+      #if(!$langObject)
+        #set($newObject = $settingsDoc.newObject('CookieConsent.ConfigurationClass'))
+        #foreach($prop in $originalObject.getProperties())
+          #if($prop.name != 'lang')
+            #set($discard = $newObject.set($prop.name, $originalObject.getProperty($prop.name).value))
+          #end
+        #end
+        #set($discard = $newObject.set('lang', $lang))
+        #set($discard = $settingsDoc.save())
+      #end
+    #end
+  #end
+  #foreach($object in $settingsDocObjects)
+    #if(!$supportedLang.split(',').contains($object.getProperty('lang').value))
+      #set($discard = $settingsDoc.removeObject($object))
+      #set($discard = $settingsDoc.save())
+    #end
+  #end
+  #if($supportedLang.split(',').size()&gt;1)
+  **$services.localization.render('XWiki.XWikiPreferences_languages'):** ##
+    #foreach($l in $supportedLang.split(','))
+      #if($xcontext.language == $l)
+        **[[$l&gt;&gt;||queryString="section=GDPR Cookie Consent Setup&amp;language=${l}"]]** ##
+      #else
+        [[$l&gt;&gt;||queryString="section=GDPR Cookie Consent Setup&amp;language=${l}"]] ##
+      #end
+    #end
 
+
+  #end
+  ##Language objects management end
+  ####
+  #set($crtLangObj = $settingsDoc.getObject('CookieConsent.ConfigurationClass','lang',$xcontext.language))
+  #set($class = $crtLangObj.xWikiClass)
+  {{html wiki=true}}
+  ##Ensure the save URL has the corect format
+  #if($settingsDoc.getURL('save').contains('http'))
+    #set($saveURL = $settingsDoc.getURL('save').replace('https://','').replace('http://',''))
+    #set($saveURL = $saveURL.replace($saveURL.split('/')[0],''))
+  #else
+    #set($saveURL = $settingsDoc.getURL('save'))
+  #end
+  &lt;form method="post" action="${saveURL}" class="xform"&gt;&lt;fieldset&gt;
+  == $services.localization.render('cookieConsent.administration.heading.general') ==
+  #foreach($property in $class.properties)
+    #if($property.name != 'lang')
+      #if($property.name == 'backgroundColor' || $property.name == 'foregroundColor')
+      ; $property.translatedPrettyName
+      (% class='clrPicker' %)(((
+      : $doc.display($property.getName(),'edit',$crtLangObj)
+      )))
+      #else
+        #if($property.name == 'buttonText')
+          == $services.localization.render('cookieConsent.administration.heading.configurableText') ==
+        #elseif($property.name == 'preferencesScripts')
+          == $services.localization.render('cookieConsent.administration.heading.trackers') ==
+        #elseif($property.name == 'necessaryLabel')
+          == $services.localization.render('cookieConsent.administration.heading.labels') ==
+        #end
+        ; $property.translatedPrettyName
+        : $doc.display($property.getName(),'edit',$crtLangObj)
+      #end
+    #else
+      ; $property.translatedPrettyName
+      : $crtLangObj.getProperty('lang').value
+    #end
+  #end
+  &lt;/fieldset&gt;
+  &lt;input type="hidden" id='secToken' name="form_token"&gt;
+  #if($xcontext.action != 'edit')
+    &lt;input id='saveButton' class="btn btn-primary" type="submit" name="action_saveandcontinue" title="Alt+Shift+S" value="$services.localization.render('admin.save')"&gt;
+  #end
+  &lt;/form&gt;
+  {{/html}}
+
+#end
 {{/velocity}}</content>
   <object>
     <name>CookieConsent.ConfigurationSheet</name>
@@ -150,8 +238,14 @@ $xwiki.jsx.use('CookieConsent.ConfigurationSheet')
     </property>
     <property>
       <code>document.observe("dom:loaded", function() {
-  $('CookieConsent.ConfigurationClass_0_backgroundColor').addClassName('procolor');
-  $('CookieConsent.ConfigurationClass_0_foregroundColor').addClassName('procolor');
+  document.getElementsByClassName('clrPicker')[0].getElementsByTagName('input')[0].addClassName('procolor');
+  document.getElementsByClassName('clrPicker')[1].getElementsByTagName('input')[0].addClassName('procolor');
+});
+require(['xwiki-meta'], function (xm) {
+  $('secToken').setValue(xm.form_token);         // get the current CSRF token
+});
+$('saveButton').observe('click', function () {
+  window.location.reload('true');
 });</code>
     </property>
     <property>

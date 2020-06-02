@@ -71,7 +71,7 @@
   #set($hasStatistics = "#gdprHas('statistics')")
   #set($hasMarketing = "#gdprHas('marketing')")
   #set($cookieSetupDoc = $xwiki.getDocument('CookieConsent.WebHome'))
-  #set($setupObject = $cookieSetupDoc.getObject('CookieConsent.ConfigurationClass'))
+  #set($setupObject = $cookieSetupDoc.getObject('CookieConsent.ConfigurationClass','lang',$xcontext.language))
   #set($preferencesScripts = $setupObject.getProperty('preferencesScripts').value)
   #set($statisticsScripts = $setupObject.getProperty('statisticsScripts').value)
   #set($marketingScripts = $setupObject.getProperty('marketingScripts').value)

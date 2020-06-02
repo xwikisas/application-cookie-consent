@@ -94,7 +94,8 @@ cookieConsent.administration.heading.labels=Personnaliser les libellés
 cookieConsent.administration.trigger.heading=Déclencher pop-up manuellement
 cookieConsent.administration.trigger.content=Afin de créer un lien/bouton pour ouvrir le pop-up cookie manuellement, il suffit d’ajouter l’identifiant
 ResetCookies à l’élément clicable. Par exemple:
-cookieConsent.administration.trigger.linklabel=Options Cookie
+cookieConsent.administration.trigger.example=Exemple
+cookieConsent.administration.trigger.linklabel=Réinitialiser les options de cookies
 cookieConsent.administration.info.param=Le paramètre doit être **preferences**, **statistics** or **marketing**.
 cookieConsent.administration.info.notaccepted=L’utilisateur actuel n’a pas encore accepté les règles spécifiques pour les cookies.</content>
 </xwikidoc>

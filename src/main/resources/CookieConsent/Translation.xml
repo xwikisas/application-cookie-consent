@@ -95,7 +95,8 @@ cookieConsent.administration.heading.trackers=Trackers and scripts
 cookieConsent.administration.heading.labels=Customize labels
 cookieConsent.administration.trigger.heading=Trigger pop-up manually
 cookieConsent.administration.trigger.content=For creating a link/button to open the cookie pop-up manually all it takes is to add the id **ResetCookies** to the clickable element, for example:
-cookieConsent.administration.trigger.linklabel=Cookie options
+cookieConsent.administration.trigger.example=Example
+cookieConsent.administration.trigger.linklabel=Reset cookie options
 cookieConsent.administration.info.param=The parameter should be **preferences**, **statistics** or **marketing**.
 cookieConsent.administration.info.notaccepted=The current user has not yet accepted the cookie policy</content>
   <object>

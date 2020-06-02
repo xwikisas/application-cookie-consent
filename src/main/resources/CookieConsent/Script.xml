@@ -182,6 +182,7 @@
   },
 
   showDisclaimer : function() {
+    clearLessCache();
     var htmlContent1 = this.settings.disclaimer1
                      + '&lt;a href="#" class="button" role="button" name="cookieConsentHide" id="cookieConsentHide"&gt;'
                      + this.settings.buttonText
@@ -355,7 +356,7 @@
       <cache>long</cache>
     </property>
     <property>
-      <code>#set($settings = $xwiki.getDocument('CookieConsent.WebHome').getObject('CookieConsent.ConfigurationClass'))
+      <code>#set($settings = $xwiki.getDocument('CookieConsent.WebHome').getObject('CookieConsent.ConfigurationClass','lang',$xcontext.language))
 #if($settings.getProperty('active').value == 1)
   #set($labels = ['necessaryLabel','preferencesLabel','statisticsLabel','marketingLabel'])
     #if("$!{settings.getProperty($labels[0]).value}" != '')
@@ -402,6 +403,9 @@ document.observe("dom:loaded", function() {
   };  
   var cookieConsent = new CookieConsent(settings);
 });
+  function clearLessCache() {
+    var cache = "$services.lesscss.clearCache()";
+  }
 #end</code>
     </property>
     <property>
