@@ -68,10 +68,10 @@ $xwiki.jsx.use('CookieConsent.ConfigurationSheet')
   #set ($supportedLang = $xwiki.getDocument('XWiki.XWikiPreferences').getObject('XWiki.XWikiPreferences').getProperty('languages').value)
   ##
   #set ($settingsDocObjects = $settingsDoc.getObjects('CookieConsent.ConfigurationClass'))
-  #set ($crtLangObject = $settingsDoc.getObject('CookieConsent.ConfigurationClass','lang',$xcontext.language))
+  #set ($crtLangObject = $settingsDoc.getObject('CookieConsent.ConfigurationClass', 'lang', $xcontext.locale))
   #if($settingsDocObjects.size() == 1 &amp;&amp; "$!{crtLangObject}" == '')
     #set ($obj = $settingsDoc.getObject('CookieConsent.ConfigurationClass'))
-    #set ($discard = $obj.set('lang',$xcontext.language))
+    #set ($discard = $obj.set('lang', $xcontext.locale))
     #set ($discard = $settingsDoc.save())
   #end
   #if($settingsDocObjects.size() &lt; $supportedLang.split(',').size())
@@ -99,7 +99,7 @@ $xwiki.jsx.use('CookieConsent.ConfigurationSheet')
   #if($supportedLang.split(',').size()&gt;1)
   **$services.localization.render('XWiki.XWikiPreferences_languages'):** ##
     #foreach($l in $supportedLang.split(','))
-      #if($xcontext.language == $l)
+      #if ($xcontext.locale == $l)
         **[[$l&gt;&gt;||queryString="section=GDPR Cookie Consent Setup&amp;language=${l}"]]** ##
       #else
         [[$l&gt;&gt;||queryString="section=GDPR Cookie Consent Setup&amp;language=${l}"]] ##
@@ -110,7 +110,7 @@ $xwiki.jsx.use('CookieConsent.ConfigurationSheet')
   #end
   ##Language objects management end
   ####
-  #set($crtLangObj = $settingsDoc.getObject('CookieConsent.ConfigurationClass','lang',$xcontext.language))
+  #set($crtLangObj = $settingsDoc.getObject('CookieConsent.ConfigurationClass', 'lang', $xcontext.locale))
   #set($class = $crtLangObj.xWikiClass)
   {{html wiki=true}}
   ##Ensure the save URL has the corect format

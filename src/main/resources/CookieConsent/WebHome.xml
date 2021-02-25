@@ -840,7 +840,7 @@
     </property>
     <property>
       <code>#template('colorThemeInit.vm')
-#set($settings = $xwiki.getDocument('CookieConsent.WebHome').getObject('CookieConsent.ConfigurationClass','lang',$xcontext.language))
+#set($settings = $xwiki.getDocument('CookieConsent.WebHome').getObject('CookieConsent.ConfigurationClass', 'lang', $xcontext.locale))
 
 #cookieConsent {
   position: fixed;

@@ -356,7 +356,7 @@
       <cache>long</cache>
     </property>
     <property>
-      <code>#set($settings = $xwiki.getDocument('CookieConsent.WebHome').getObject('CookieConsent.ConfigurationClass','lang',$xcontext.language))
+      <code>#set($settings = $xwiki.getDocument('CookieConsent.WebHome').getObject('CookieConsent.ConfigurationClass', 'lang', $xcontext.locale))
 #if($settings.getProperty('active').value == 1)
   #set($labels = ['necessaryLabel','preferencesLabel','statisticsLabel','marketingLabel'])
     #if("$!{settings.getProperty($labels[0]).value}" != '')
