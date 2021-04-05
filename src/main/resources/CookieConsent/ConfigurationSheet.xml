@@ -54,7 +54,7 @@ $services.localization.render('cookieConsent.administration.description.intro')
 
   $services.localization.render('cookieConsent.administration.trigger.content')
 
-  {{code}}{{html}}&lt;a href="#" id='ResetCookies'&gt;$services.localization.render('cookieConsent.administration.trigger.linklabel')&lt;/a&gt;{{/html}}{{/code}}
+  {{code language="none"}}{{html}}&lt;a href="#" id='ResetCookies'&gt;$services.localization.render('cookieConsent.administration.trigger.linklabel')&lt;/a&gt;{{/html}}{{/code}}
 
   **$services.localization.render('cookieConsent.administration.trigger.example'):** {{html}}&lt;a href="#" id='ResetCookies'&gt;$services.localization.render('cookieConsent.administration.trigger.linklabel')&lt;/a&gt;{{/html}}##
 $xwiki.jsfx.use('uicomponents/widgets/colorpicker/procolor.js', true)
