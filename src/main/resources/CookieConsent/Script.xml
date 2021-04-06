@@ -391,16 +391,15 @@ document.observe("dom:loaded", function() {
     'configButtonText' : "$escapetool.javascript($!settings.getProperty('configButtonText').value)",
     'disclaimer1' : "$escapetool.javascript($!settings.disclaimer1)",
     'disclaimer2' : "$escapetool.javascript($!settings.disclaimer2)",
-    'necessaryInfoBox' : "$settings.getProperty('necessaryInfoBox').value.trim()",
-    'preferencesInfoBox' : "$settings.getProperty('preferencesInfoBox').value.trim()",
-    'statisticsInfoBox' : "$settings.getProperty('statisticsInfoBox').value.trim()",
-    'marketingInfoBox' : "$settings.getProperty('marketingInfoBox').value.trim()",
-    'mandatoryLabel' : "$displayLabel0",
-    'preferencesLabel' : "$displayLabel1",
-    'statisticsLabel' : "$displayLabel2",
-    'marketingLabel' : "$displayLabel3"
-    
-  };  
+    'necessaryInfoBox' : "$escapetool.javascript($settings.getProperty('necessaryInfoBox').value.trim())",
+    'preferencesInfoBox' : "$escapetool.javascript($settings.getProperty('preferencesInfoBox').value.trim())",
+    'statisticsInfoBox' : "$escapetool.javascript($settings.getProperty('statisticsInfoBox').value.trim())",
+    'marketingInfoBox' : "$escapetool.javascript($settings.getProperty('marketingInfoBox').value.trim())",
+    'mandatoryLabel' : "$escapetool.javascript($displayLabel0)",
+    'preferencesLabel' : "$escapetool.javascript($displayLabel1)",
+    'statisticsLabel' : "$escapetool.javascript($displayLabel2)",
+    'marketingLabel' : "$escapetool.javascript($displayLabel3)"
+  };
   var cookieConsent = new CookieConsent(settings);
 });
   function clearLessCache() {
