@@ -184,12 +184,12 @@
   showDisclaimer : function() {
     clearLessCache();
     var htmlContent1 = this.settings.disclaimer1
-                     + '&lt;a href="#" class="button" role="button" name="cookieConsentHide" id="cookieConsentHide"&gt;'
+                     + '&lt;button class="button" role="button" name="cookieConsentHide" id="cookieConsentHide"&gt;'
                      + this.settings.buttonText
-                     + '&lt;/a&gt;'
-                     + '&lt;a href="#" class="button" role="button" name="cookieConsentConfig" id="cookieConsentConfig"&gt;'
+                     + '&lt;/button&gt;'
+                     + '&lt;button class="button" role="button" name="cookieConsentConfig" id="cookieConsentConfig"&gt;'
                      + this.settings.configButtonText
-                     + '&lt;/a&gt;';
+                     + '&lt;/button&gt;';
     
     var htmlContent2 = this.settings.disclaimer2
                      + '&lt;div id="CookieSelectPane"&gt;'
@@ -213,7 +213,7 @@
                      + '&lt;input id="CookieButtonMarketing" class="CookieButton" tabindex="1" type="checkbox"&gt;'
                      + this.settings.marketingLabel + '&lt;/label&gt;'
                      + '&lt;/div&gt;&lt;/div&gt;'
-                     + '&lt;a href="#" class="button" role="button" name="cookieConsentOK" id="cookieConsentOK"&gt;OK&lt;/a&gt;';
+                     + '&lt;button class="button" role="button" name="cookieConsentOK" id="cookieConsentOK"&gt;OK&lt;/button&gt;';
 
     var html = '&lt;div id="cookieConsent" style="display: none;"&gt;'
              + '&lt;div class="col-md-2"&gt;&lt;/div&gt;'

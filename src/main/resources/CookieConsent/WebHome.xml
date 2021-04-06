@@ -867,35 +867,30 @@
   box-shadow:         0 0 5px black;
 }
 
-#cookieConsentHide, #cookieConsentOK {
+#cookieConsentHide, #cookieConsentConfig, #cookieConsentOK {
   appearance: button;
-  background-color: @btn-primary-bg;
-  text-decoration: none;
-  color: @btn-primary-color;
   border: 2px solid @btn-primary-bg;
-  border-radius: 0;
   transition: all 0.3s;
   &amp;:hover {
-    background-color: @btn-primary-color;
-    color: @btn-primary-bg;
     transition: all 0.3s;
   }
 }
 
-#cookieConsentConfig {
-  appearance: button;
-  background-color: @btn-primary-color;
-  text-decoration: none;
-  color: initial;
-  border: 0;
-  border-radius: 0;
-  color: @btn-primary-bg;
-  border: 2px solid @btn-primary-bg;
-  transition: all 0.3s;
+#cookieConsentHide, #cookieConsentOK {
+  background-color: @btn-primary-bg;
+  color: @btn-primary-color;
   &amp;:hover {
-    color: @btn-primary-color;
+    background-color: @btn-primary-color;
+    color: @btn-primary-bg;
+  }
+}
+
+#cookieConsentConfig {
+  background-color: @btn-primary-color;
+  color: @btn-primary-bg;
+  &amp;:hover {
     background-color: @btn-primary-bg;
-    transition: all 0.3s;
+    color: @btn-primary-color;
   }
 }
 #cookieConsent .button {
@@ -905,6 +900,7 @@
     margin: 0 5px;
   #end
   min-width: 90px;
+  padding: 6px;
 }
 #CookieSelectPane {
     display: inline-block;
