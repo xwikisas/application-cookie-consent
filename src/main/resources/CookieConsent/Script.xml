@@ -183,6 +183,11 @@
 
   showDisclaimer : function() {
     clearLessCache();
+    if (this.settings.activeCookieTypes === '') {
+      return;
+    }
+    var activeCookieTypes = this.settings.activeCookieTypes.split(',');
+
     var htmlContent1 = this.settings.disclaimer1
                      + '&lt;button class="button" role="button" name="cookieConsentHide" id="cookieConsentHide"&gt;'
                      + this.settings.buttonText
@@ -190,67 +195,54 @@
                      + '&lt;button class="button" role="button" name="cookieConsentConfig" id="cookieConsentConfig"&gt;'
                      + this.settings.configButtonText
                      + '&lt;/button&gt;';
-    
-    var htmlContent2 = this.settings.disclaimer2
-                     + '&lt;div id="CookieSelectPane"&gt;'
-                     + '&lt;div class="CookieSelectButtonWrapper" title="' + this.settings.necessaryInfoBox + '"&gt;'
-                     + '&lt;label for="CookieButtonNecessary"&gt;'
-                     + '&lt;input id="CookieButtonNecessary" class="CookieButton" disabled="disabled" checked="checked" type="checkbox"&gt;'
-                     + this.settings.mandatoryLabel + '&lt;/label&gt;'
-                     + '&lt;/div&gt;'
-                     + '&lt;div class="CookieSelectButtonWrapper" title="' + this.settings.preferencesInfoBox + '"&gt;'
-                     + '&lt;label for="CookieButtonPreferences"&gt;'
-                     + '&lt;input id="CookieButtonPreferences" class="CookieButton" tabindex="1" type="checkbox"&gt;'
-                     + this.settings.preferencesLabel + '&lt;/label&gt;'
-                     + '&lt;/div&gt;'
-                     + '&lt;div class="CookieSelectButtonWrapper" title="' + this.settings.statisticsInfoBox + '"&gt;'
-                     + '&lt;label for="CookieButtonStatistics"&gt;'
-                     + '&lt;input id="CookieButtonStatistics" class="CookieButton" tabindex="1" type="checkbox"&gt;'
-                     + this.settings.statisticsLabel + '&lt;/label&gt;'
-                     + '&lt;/div&gt;'
-                     + '&lt;div class="CookieSelectButtonWrapper" title="' + this.settings.marketingInfoBox + '"&gt;'
-                     + '&lt;label for="CookieButtonMarketing"&gt;'
-                     + '&lt;input id="CookieButtonMarketing" class="CookieButton" tabindex="1" type="checkbox"&gt;'
-                     + this.settings.marketingLabel + '&lt;/label&gt;'
-                     + '&lt;/div&gt;&lt;/div&gt;'
-                     + '&lt;button class="button" role="button" name="cookieConsentOK" id="cookieConsentOK"&gt;OK&lt;/button&gt;';
+
+    var htmlContent2 = this.settings.disclaimer2 + '&lt;div id="CookieSelectPane"&gt;';
+
+    for (const element of activeCookieTypes) {
+      var label = this.settings[element + 'Label'];
+      var infoBox = this.settings[element + 'InfoBox'];
+      var disabled = '';
+      if (element === 'necessary') {
+        label = this.settings.mandatoryLabel;
+        disabled = 'disabled="disabled" checked="checked"';
+      }
+      htmlContent2 = htmlContent2
+                   + '&lt;div class="CookieSelectButtonWrapper" title="' + infoBox + '"&gt;'
+                   + '&lt;label for="CookieButton' + label + '"&gt;'
+                   + '&lt;input id="CookieButton' + label + '" class="CookieButton" tabindex="1" ' + disabled +' type="checkbox"&gt;'
+                   + label + '&lt;/label&gt;'
+                   + '&lt;/div&gt;';
+    }
+
+    htmlContent2 = htmlContent2 + '&lt;/div&gt;&lt;button class="button" role="button" name="cookieConsentOK" id="cookieConsentOK"&gt;OK&lt;/button&gt;';
 
     var html = '&lt;div id="cookieConsent" style="display: none;"&gt;'
              + '&lt;div class="col-md-2"&gt;&lt;/div&gt;'
-             + '&lt;div id="cookieConsentContent" class="col-md-8"&gt;' 
+             + '&lt;div id="cookieConsentContent" class="col-md-8"&gt;'
              + htmlContent1
              + '&lt;/div&gt;'
              + '&lt;div class="col-md-2"&gt;&lt;/div&gt;'
              + '&lt;/div&gt;'
              + '&lt;/div&gt;';
 
-    var gdprSettings = ['necessary', 'preferences','statistics','marketing'];
     $('xwikimaincontainerinner').insert( {before : html } );
-    $("cookieConsentHide").observe('click', this.hideDisclaimer.bind(this, gdprSettings));
+    $("cookieConsentHide").observe('click', this.hideDisclaimer.bind(this, activeCookieTypes));
     $("cookieConsentConfig").addEventListener("click", function(){
       $("cookieConsentContent").innerHTML = htmlContent2;
       $("cookieConsentOK").observe('click', function() {
-        if(!$("CookieButtonPreferences").checked){
-          var index = gdprSettings.indexOf('preferences');
-          if (index &gt; -1) {
-            gdprSettings.splice(index, 1);
+        for (const element of activeCookieTypes) {
+          var label = this.settings[element + 'Label'];
+          if (element === 'necessary') {
+            label = this.settings.mandatoryLabel;
+          }
+          if(!$('CookieButton' + label).checked) {
+            var index = activeCookieTypes.indexOf(element);
+            if (index &gt; -1) {
+              activeCookieTypes.splice(index, 1);
+            }
           }
         }
-        if(!$("CookieButtonStatistics").checked){
-          var index = gdprSettings.indexOf('statistics');
-          if (index &gt; -1) {
-            gdprSettings.splice(index, 1);
-          }
-        }
-        if(!$("CookieButtonMarketing").checked){
-          var index = gdprSettings.indexOf('marketing');
-          if (index &gt; -1) {
-            gdprSettings.splice(index, 1);
-          }
-        }
-
-        this.hideDisclaimer(gdprSettings);
-
+        this.hideDisclaimer(activeCookieTypes);
       }.bind(this));
     }.bind(this));
 
@@ -398,7 +390,8 @@ document.observe("dom:loaded", function() {
     'mandatoryLabel' : "$escapetool.javascript($displayLabel0)",
     'preferencesLabel' : "$escapetool.javascript($displayLabel1)",
     'statisticsLabel' : "$escapetool.javascript($displayLabel2)",
-    'marketingLabel' : "$escapetool.javascript($displayLabel3)"
+    'marketingLabel' : "$escapetool.javascript($displayLabel3)",
+    'activeCookieTypes' : "$stringtool.join($settings.getValue('activeCookieTypes'), ',')"
   };
   var cookieConsent = new CookieConsent(settings);
 });

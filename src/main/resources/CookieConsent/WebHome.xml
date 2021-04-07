@@ -68,6 +68,27 @@
         <validationRegExp/>
         <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
       </active>
+      <activeCookieTypes>
+        <cache>0</cache>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <displayType>checkbox</displayType>
+        <multiSelect>1</multiSelect>
+        <name>activeCookieTypes</name>
+        <number>23</number>
+        <picker>0</picker>
+        <prettyName>Active cookie types</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <sort>none</sort>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <values>necessary|preferences|statistics|marketing</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </activeCookieTypes>
       <animation>
         <cache>0</cache>
         <customDisplay/>
@@ -183,7 +204,7 @@
         <customDisplay/>
         <disabled>0</disabled>
         <name>lang</name>
-        <number>23</number>
+        <number>24</number>
         <picker>1</picker>
         <prettyName>Locale</prettyName>
         <size>30</size>
@@ -422,6 +443,14 @@
     </class>
     <property>
       <active>1</active>
+    </property>
+    <property>
+      <activeCookieTypes>
+        <value>necessary</value>
+        <value>preferences</value>
+        <value>statistics</value>
+        <value>marketing</value>
+      </activeCookieTypes>
     </property>
     <property>
       <animation>slide</animation>

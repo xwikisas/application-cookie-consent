@@ -31,8 +31,8 @@
   <parent>CookieConsent.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1536222072000</date>
-  <contentUpdateDate>1536222072000</contentUpdateDate>
+  <date>1617804015000</date>
+  <contentUpdateDate>1617804015000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -71,7 +71,10 @@ CookieConsent.ConfigurationClass_necessaryLabel=Modify the "necessary" label
 CookieConsent.ConfigurationClass_preferencesLabel=Modify the "preference" label
 CookieConsent.ConfigurationClass_statisticsLabel=Modify the "statistics" label
 CookieConsent.ConfigurationClass_marketingLabel=Modify the "marketing" label
-
+CookieConsent.ConfigurationClass_activeCookieTypes_necessary=Necessary
+CookieConsent.ConfigurationClass_activeCookieTypes_preferences=Preferences
+CookieConsent.ConfigurationClass_activeCookieTypes_statistics=Statistics
+CookieConsent.ConfigurationClass_activeCookieTypes_marketing=Marketing
 
 ## Disclaimer ##
 cookieConsent.configure.title.mandatory=Necessary

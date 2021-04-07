@@ -123,9 +123,9 @@ $xwiki.jsx.use('CookieConsent.ConfigurationSheet')
   &lt;form method="post" action="${saveURL}" class="xform"&gt;&lt;fieldset&gt;
   == $services.localization.render('cookieConsent.administration.heading.general') ==
   #foreach($property in $class.properties)
+    ; $property.translatedPrettyName
     #if($property.name != 'lang')
       #if($property.name == 'backgroundColor' || $property.name == 'foregroundColor')
-      ; $property.translatedPrettyName
       (% class='clrPicker' %)(((
       : $doc.display($property.getName(),'edit',$crtLangObj)
       )))
@@ -137,11 +137,9 @@ $xwiki.jsx.use('CookieConsent.ConfigurationSheet')
         #elseif($property.name == 'necessaryLabel')
           == $services.localization.render('cookieConsent.administration.heading.labels') ==
         #end
-        ; $property.translatedPrettyName
         : $doc.display($property.getName(),'edit',$crtLangObj)
       #end
     #else
-      ; $property.translatedPrettyName
       : $crtLangObj.getProperty('lang').value
     #end
   #end
