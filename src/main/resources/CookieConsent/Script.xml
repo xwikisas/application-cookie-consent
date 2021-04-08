@@ -198,7 +198,8 @@
 
     var htmlContent2 = this.settings.disclaimer2 + '&lt;div id="CookieSelectPane"&gt;';
 
-    for (const element of activeCookieTypes) {
+    for (i = 0; i &lt; activeCookieTypes.length; i++) {
+      var element = activeCookieTypes[i];
       var label = this.settings[element + 'Label'];
       var infoBox = this.settings[element + 'InfoBox'];
       var disabled = '';
@@ -230,7 +231,8 @@
     $("cookieConsentConfig").addEventListener("click", function(){
       $("cookieConsentContent").innerHTML = htmlContent2;
       $("cookieConsentOK").observe('click', function() {
-        for (const element of activeCookieTypes) {
+        for (i = 0; i &lt; activeCookieTypes.length; i++) {
+          var element = activeCookieTypes[i];
           var label = this.settings[element + 'Label'];
           if (element === 'necessary') {
             label = this.settings.mandatoryLabel;
