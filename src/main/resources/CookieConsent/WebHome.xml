@@ -869,8 +869,10 @@
     </property>
     <property>
       <code>#template('colorThemeInit.vm')
-#set($settings = $xwiki.getDocument('CookieConsent.WebHome').getObject('CookieConsent.ConfigurationClass', 'lang', "$xcontext.locale"))
-
+#set ($settings = $xwiki.getDocument('CookieConsent.WebHome').getObject('CookieConsent.ConfigurationClass', 'lang', "$xcontext.locale"))
+#if (!$settings)
+  #set ($settings = $xwiki.getDocument('CookieConsent.WebHome').getObject('CookieConsent.ConfigurationClass'))
+#end
 #cookieConsent {
   position: fixed;
   #if($settings.getProperty('type').value == 'bar')
