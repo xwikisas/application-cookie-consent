@@ -869,26 +869,26 @@
     </property>
     <property>
       <code>#template('colorThemeInit.vm')
-#set($settings = $xwiki.getDocument('CookieConsent.WebHome').getObject('CookieConsent.ConfigurationClass', 'lang', "${xcontext.locale}"))
+#set($settings = $xwiki.getDocument('CookieConsent.WebHome').getObject('CookieConsent.ConfigurationClass', 'lang', "$xcontext.locale"))
 
 #cookieConsent {
   position: fixed;
   #if($settings.getProperty('type').value == 'bar')
-    ${settings.getProperty('position').value}: 0;
+    $settings.getProperty('position').value: 0;
     left: 0;
     right: 0;
   #else
-    ${settings.getProperty('position').value}: 10px;
+    $settings.getProperty('position').value: 10px;
     left: 50%;
     transform:translatex(-50%);
     max-width: 400px;
   #end
-  background: ${settings.getProperty('backgroundColor').value};
-  color: ${settings.getProperty('foregroundColor').value};
+  background: $settings.getProperty('backgroundColor').value;
+  color: $settings.getProperty('foregroundColor').value;
   text-align: center;
   line-height: 1.5;
   overflow: hidden; 
-  opacity: ${settings.getProperty('opacity').value};
+  opacity: $settings.getProperty('opacity').value;
   z-index: 9999;
   padding: 10px;
   -webkit-box-shadow: 0 0 5px black;
