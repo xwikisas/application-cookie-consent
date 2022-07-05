@@ -122,14 +122,17 @@
       <cache>long</cache>
     </property>
     <property>
-      <code>require.config({
-  paths: {
-    'effect': "$xwiki.getSkinFile('js/scriptaculous/effects.js', true)" +
-      "?v=$escapetool.url($xwiki.version)"
-  }
-});
+      <code>// Since XWiki 14.1, scriptaculous effects is provided as a RequireJS package
+if (require.toUrl('scriptaculous/effects').indexOf('/webjars/') &lt; 0) {
+  require.config({
+    paths: {
+      'scriptaculous/effects': "$xwiki.getSkinFile('js/scriptaculous/effects.js', true)" +
+        "?v=$escapetool.url($xwiki.version)"
+    }
+  });
+}
 
-define('cookie-consent', ['effect'], function() {
+define('cookie-consent', ['scriptaculous/effects'], function() {
   var CookieConsent = Class.create({
     initialize : function(settings) {
       this.settings = settings;
