@@ -122,147 +122,160 @@
       <cache>long</cache>
     </property>
     <property>
-      <code>var CookieConsent = Class.create({
-  initialize : function(settings) {
-    this.settings = settings;
-    //this.clearCookie('cookieConsent'); // for debugging
-    if(!this.getCookie('cookieConsent')){
-      this.showDisclaimer();
+      <code>// Since XWiki 14.1, scriptaculous effects is provided as a RequireJS package
+if (require.toUrl('scriptaculous/effects').indexOf('/webjars/') &lt; 0) {
+  require.config({
+    paths: {
+      'scriptaculous/effects': "$xwiki.getSkinFile('js/scriptaculous/effects.js', true)" +
+        "?v=$escapetool.url($xwiki.version)"
     }
-    var resetCookiesButton = $('ResetCookies');
-    if (resetCookiesButton != null) {
-      resetCookiesButton.observe('click', function() {
+  });
+}
+
+define('cookie-consent', ['scriptaculous/effects'], function() {
+  var CookieConsent = Class.create({
+    initialize : function(settings) {
+      this.settings = settings;
+      //this.clearCookie('cookieConsent'); // for debugging
+      if(!this.getCookie('cookieConsent')){
         this.showDisclaimer();
-      }.bind(this));
-    }
-  },
-
-  getCookie : function(key)
-  {
-    var keyEquals = key + "=";
-    var value     = false;
-
-    document.cookie.split(';').invoke('strip').each(function(s){
-      if (s.startsWith(keyEquals)) {
-        value = unescape(s.substring(keyEquals.length, s.length));
       }
-    });
+      var resetCookiesButton = $('ResetCookies');
+      if (resetCookiesButton != null) {
+        resetCookiesButton.observe('click', function() {
+          this.showDisclaimer();
+        }.bind(this));
+      }
+    },
+
+    getCookie : function(key)
+    {
+      var keyEquals = key + "=";
+      var value     = false;
+
+      document.cookie.split(';').invoke('strip').each(function(s){
+        if (s.startsWith(keyEquals)) {
+          value = unescape(s.substring(keyEquals.length, s.length));
+        }
+      });
 
     return value;
   },
 
-  setCookie : function(key, value, days) {
-    var setValue      = key + '=' + escape(new String(value));
-    var setExpiration = "";
+    setCookie : function(key, value, days) {
+      var setValue      = key + '=' + escape(new String(value));
+      var setExpiration = "";
 
-    if (days) {
-      var date = new Date();
-      date.setTime(date.getTime() + (days*24*60*60*1000));
-      var setExpiration = "; expires=" + date.toGMTString();
-    }
-
-    var cookieString = setValue + setExpiration + ";path=/";
-    document.cookie  = cookieString;
-  },
-
-  clearCookie : function(key) {
-    this.setCookie(key,'',-1);
-  },
-
-  animation : function(event, element) {
-    switch(this.settings.animation)
-    {
-      case 'none': 
-        event == 'show' ? $(element).show() : $(element).hide(); break;
-      case 'slide': 
-        event == 'show' ? Effect.BlindDown(element, { duration : 1 }) : Effect.BlindUp(element, { duration : 1 }); break;
-      case 'fade':
-        event == 'show' ? Effect.Appear(element, { duration : 1 }) : Effect.Fade(element, { duration : 1 }); break;
-    }
-  },
-
-  showDisclaimer : function() {
-    clearLessCache();
-    if (this.settings.activeCookieTypes === '') {
-      return;
-    }
-    var activeCookieTypes = this.settings.activeCookieTypes.split(',');
-
-    var htmlContent1 = this.settings.disclaimer1
-                     + '&lt;button class="button" role="button" name="cookieConsentHide" id="cookieConsentHide"&gt;'
-                     + this.settings.buttonText
-                     + '&lt;/button&gt;'
-                     + '&lt;button class="button" role="button" name="cookieConsentConfig" id="cookieConsentConfig"&gt;'
-                     + this.settings.configButtonText
-                     + '&lt;/button&gt;';
-
-    var htmlContent2 = this.settings.disclaimer2 + '&lt;div id="CookieSelectPane"&gt;';
-
-    for (i = 0; i &lt; activeCookieTypes.length; i++) {
-      var element = activeCookieTypes[i];
-      var label = this.settings[element + 'Label'];
-      var infoBox = this.settings[element + 'InfoBox'];
-      var disabled = '';
-      if (element === 'necessary') {
-        label = this.settings.mandatoryLabel;
-        disabled = 'disabled="disabled" checked="checked"';
+      if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        var setExpiration = "; expires=" + date.toGMTString();
       }
-      htmlContent2 = htmlContent2
-                   + '&lt;div class="CookieSelectButtonWrapper" title="' + infoBox + '"&gt;'
-                   + '&lt;label for="CookieButton' + label + '"&gt;'
-                   + '&lt;input id="CookieButton' + label + '" class="CookieButton" tabindex="1" ' + disabled +' type="checkbox"&gt;'
-                   + label + '&lt;/label&gt;'
-                   + '&lt;/div&gt;';
-    }
 
-    htmlContent2 = htmlContent2 + '&lt;/div&gt;&lt;button class="button" role="button" name="cookieConsentOK" id="cookieConsentOK"&gt;OK&lt;/button&gt;';
+      var cookieString = setValue + setExpiration + ";path=/";
+      document.cookie  = cookieString;
+    },
 
-    var html = '&lt;div id="cookieConsent" style="display: none;"&gt;'
-             + '&lt;div class="col-md-2"&gt;&lt;/div&gt;'
-             + '&lt;div id="cookieConsentContent" class="col-md-8"&gt;'
-             + htmlContent1
-             + '&lt;/div&gt;'
-             + '&lt;div class="col-md-2"&gt;&lt;/div&gt;'
-             + '&lt;/div&gt;'
-             + '&lt;/div&gt;';
+    clearCookie : function(key) {
+      this.setCookie(key,'',-1);
+    },
 
-    $('xwikimaincontainerinner').insert( {before : html } );
-    $("cookieConsentHide").observe('click', this.hideDisclaimer.bind(this, activeCookieTypes));
-    $("cookieConsentConfig").addEventListener("click", function(){
-      $("cookieConsentContent").innerHTML = htmlContent2;
-      $("cookieConsentOK").observe('click', function() {
-        for (i = 0; i &lt; activeCookieTypes.length; i++) {
-          var element = activeCookieTypes[i];
-          var label = this.settings[element + 'Label'];
-          if (element === 'necessary') {
-            label = this.settings.mandatoryLabel;
-          }
-          if(!$('CookieButton' + label).checked) {
-            var index = activeCookieTypes.indexOf(element);
-            if (index &gt; -1) {
-              activeCookieTypes.splice(index, 1);
+    animation : function(event, element) {
+      switch(this.settings.animation)
+      {
+        case 'none': 
+          event == 'show' ? $(element).show() : $(element).hide(); break;
+        case 'slide': 
+          event == 'show' ? Element.blindDown(element, { duration : 1 }) : Element.blindUp(element, { duration : 1 }); break;
+        case 'fade':
+          event == 'show' ? Element.blindDown(element, { duration : 1 }) : Element.blindUp(element, { duration : 1 }); break;
+      }
+    },
+
+    showDisclaimer : function() {
+      clearLessCache();
+      if (this.settings.activeCookieTypes === '') {
+        return;
+      }
+      var activeCookieTypes = this.settings.activeCookieTypes.split(',');
+
+      var htmlContent1 = this.settings.disclaimer1
+                       + '&lt;button class="button" role="button" name="cookieConsentHide" id="cookieConsentHide"&gt;'
+                       + this.settings.buttonText
+                       + '&lt;/button&gt;'
+                       + '&lt;button class="button" role="button" name="cookieConsentConfig" id="cookieConsentConfig"&gt;'
+                       + this.settings.configButtonText
+                       + '&lt;/button&gt;';
+
+      var htmlContent2 = this.settings.disclaimer2 + '&lt;div id="CookieSelectPane"&gt;';
+
+      for (i = 0; i &lt; activeCookieTypes.length; i++) {
+        var element = activeCookieTypes[i];
+        var label = this.settings[element + 'Label'];
+        var infoBox = this.settings[element + 'InfoBox'];
+        var disabled = '';
+        if (element === 'necessary') {
+          label = this.settings.mandatoryLabel;
+          disabled = 'disabled="disabled" checked="checked"';
+        }
+        htmlContent2 = htmlContent2
+                     + '&lt;div class="CookieSelectButtonWrapper" title="' + infoBox + '"&gt;'
+                     + '&lt;label for="CookieButton' + label + '"&gt;'
+                     + '&lt;input id="CookieButton' + label + '" class="CookieButton" tabindex="1" ' + disabled +' type="checkbox"&gt;'
+                     + label + '&lt;/label&gt;'
+                     + '&lt;/div&gt;';
+      }
+
+      htmlContent2 = htmlContent2 + '&lt;/div&gt;&lt;button class="button" role="button" name="cookieConsentOK" id="cookieConsentOK"&gt;OK&lt;/button&gt;';
+
+      var html = '&lt;div id="cookieConsent" style="display: none;"&gt;'
+               + '&lt;div class="col-md-2"&gt;&lt;/div&gt;'
+               + '&lt;div id="cookieConsentContent" class="col-md-8"&gt;'
+               + htmlContent1
+               + '&lt;/div&gt;'
+               + '&lt;div class="col-md-2"&gt;&lt;/div&gt;'
+               + '&lt;/div&gt;'
+               + '&lt;/div&gt;';
+
+      $('xwikimaincontainerinner').insert( {before : html } );
+      $("cookieConsentHide").observe('click', this.hideDisclaimer.bind(this, activeCookieTypes));
+      $("cookieConsentConfig").addEventListener("click", function(){
+        $("cookieConsentContent").innerHTML = htmlContent2;
+        $("cookieConsentOK").observe('click', function() {
+          for (i = 0; i &lt; activeCookieTypes.length; i++) {
+            var element = activeCookieTypes[i];
+            var label = this.settings[element + 'Label'];
+            if (element === 'necessary') {
+              label = this.settings.mandatoryLabel;
+            }
+            if(!$('CookieButton' + label).checked) {
+              var index = activeCookieTypes.indexOf(element);
+              if (index &gt; -1) {
+                activeCookieTypes.splice(index, 1);
+              }
             }
           }
-        }
-        this.hideDisclaimer(activeCookieTypes);
+          this.hideDisclaimer(activeCookieTypes);
+        }.bind(this));
       }.bind(this));
-    }.bind(this));
 
-    this.animation('show', 'cookieConsent');
-  },
+      this.animation('show', 'cookieConsent');
+    },
 
-  hideDisclaimer : function(param) {
-    this.setCookie('cookieConsent', 'hide', 365);
-    this.setCookie('gdprSettings', param, 365);
-    this.animation('hide', 'cookieConsent');
-  }
-});</code>
+    hideDisclaimer : function(param) {
+      this.setCookie('cookieConsent', 'hide', 365);
+      this.setCookie('gdprSettings', param, 365);
+      this.animation('hide', 'cookieConsent');
+    }
+  });
+  return CookieConsent;
+})</code>
     </property>
     <property>
       <name>Core</name>
     </property>
     <property>
-      <parse/>
+      <parse>1</parse>
     </property>
     <property>
       <use>always</use>
@@ -378,27 +391,29 @@
     #end
 
 document.observe("dom:loaded", function() {
-  var settings =
-  {
-    'type'       : "$settings.getProperty('type').value",
-    'position'   : "$settings.getProperty('position').value",
-    'animation'  : "$settings.getProperty('animation').value",
-    'buttonType' : "$settings.getProperty('buttonType').value",
-    'buttonText' : "$escapetool.javascript($!settings.getProperty('buttonText').value)",
-    'configButtonText' : "$escapetool.javascript($!settings.getProperty('configButtonText').value)",
-    'disclaimer1' : "$escapetool.javascript($!settings.disclaimer1)",
-    'disclaimer2' : "$escapetool.javascript($!settings.disclaimer2)",
-    'necessaryInfoBox' : "$escapetool.javascript($settings.getProperty('necessaryInfoBox').value.trim())",
-    'preferencesInfoBox' : "$escapetool.javascript($settings.getProperty('preferencesInfoBox').value.trim())",
-    'statisticsInfoBox' : "$escapetool.javascript($settings.getProperty('statisticsInfoBox').value.trim())",
-    'marketingInfoBox' : "$escapetool.javascript($settings.getProperty('marketingInfoBox').value.trim())",
-    'mandatoryLabel' : "$escapetool.javascript($displayLabel0)",
-    'preferencesLabel' : "$escapetool.javascript($displayLabel1)",
-    'statisticsLabel' : "$escapetool.javascript($displayLabel2)",
-    'marketingLabel' : "$escapetool.javascript($displayLabel3)",
-    'activeCookieTypes' : "$stringtool.join($settings.getValue('activeCookieTypes'), ',')"
-  };
-  var cookieConsent = new CookieConsent(settings);
+  require(['cookie-consent'], function(CookieConsent) {
+    var settings =
+    {
+      'type'       : "$settings.getProperty('type').value",
+      'position'   : "$settings.getProperty('position').value",
+      'animation'  : "$settings.getProperty('animation').value",
+      'buttonType' : "$settings.getProperty('buttonType').value",
+      'buttonText' : "$escapetool.javascript($!settings.getProperty('buttonText').value)",
+      'configButtonText' : "$escapetool.javascript($!settings.getProperty('configButtonText').value)",
+      'disclaimer1' : "$escapetool.javascript($!settings.disclaimer1)",
+      'disclaimer2' : "$escapetool.javascript($!settings.disclaimer2)",
+      'necessaryInfoBox' : "$escapetool.javascript($settings.getProperty('necessaryInfoBox').value.trim())",
+      'preferencesInfoBox' : "$escapetool.javascript($settings.getProperty('preferencesInfoBox').value.trim())",
+      'statisticsInfoBox' : "$escapetool.javascript($settings.getProperty('statisticsInfoBox').value.trim())",
+      'marketingInfoBox' : "$escapetool.javascript($settings.getProperty('marketingInfoBox').value.trim())",
+      'mandatoryLabel' : "$escapetool.javascript($displayLabel0)",
+      'preferencesLabel' : "$escapetool.javascript($displayLabel1)",
+      'statisticsLabel' : "$escapetool.javascript($displayLabel2)",
+      'marketingLabel' : "$escapetool.javascript($displayLabel3)",
+      'activeCookieTypes' : "$stringtool.join($settings.getValue('activeCookieTypes'), ',')"
+    };
+    var cookieConsent = new CookieConsent(settings);
+  });
 });
   function clearLessCache() {
     var cache = "$services.lesscss.clearCache()";
