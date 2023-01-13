@@ -20,7 +20,7 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
 -->
 
-<xwikidoc version="1.3" reference="CookieConsent.ConfigurationClass" locale="">
+<xwikidoc version="1.4" reference="CookieConsent.ConfigurationClass" locale="">
   <web>CookieConsent</web>
   <name>ConfigurationClass</name>
   <language/>
@@ -31,8 +31,8 @@
   <parent>CookieConsent.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1536219001000</date>
-  <contentUpdateDate>1536219001000</contentUpdateDate>
+  <date>1673531884000</date>
+  <contentUpdateDate>1673527466000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -55,6 +55,7 @@
       <disabled>0</disabled>
       <displayFormType>select</displayFormType>
       <displayType/>
+      <hint/>
       <name>active</name>
       <number>1</number>
       <prettyName>active</prettyName>
@@ -66,11 +67,15 @@
     <activeCookieTypes>
       <cache>0</cache>
       <customDisplay/>
+      <defaultValue/>
       <disabled>0</disabled>
       <displayType>checkbox</displayType>
+      <freeText/>
+      <hint/>
+      <largeStorage>0</largeStorage>
       <multiSelect>1</multiSelect>
       <name>activeCookieTypes</name>
-      <number>23</number>
+      <number>24</number>
       <picker>0</picker>
       <prettyName>Active cookie types</prettyName>
       <relationalStorage>0</relationalStorage>
@@ -87,8 +92,12 @@
     <animation>
       <cache>0</cache>
       <customDisplay/>
+      <defaultValue/>
       <disabled>0</disabled>
       <displayType>select</displayType>
+      <freeText/>
+      <hint/>
+      <largeStorage>0</largeStorage>
       <multiSelect>0</multiSelect>
       <name>animation</name>
       <number>4</number>
@@ -108,6 +117,7 @@
     <backgroundColor>
       <customDisplay/>
       <disabled>0</disabled>
+      <hint/>
       <name>backgroundColor</name>
       <number>5</number>
       <picker>0</picker>
@@ -123,6 +133,7 @@
       <customDisplay/>
       <disabled>0</disabled>
       <editor>Text</editor>
+      <hint/>
       <name>buttonText</name>
       <number>8</number>
       <picker>0</picker>
@@ -139,8 +150,9 @@
       <customDisplay/>
       <disabled>0</disabled>
       <editor>Text</editor>
+      <hint/>
       <name>configButtonText</name>
-      <number>9</number>
+      <number>10</number>
       <picker>0</picker>
       <prettyName>configButtonText</prettyName>
       <rows>5</rows>
@@ -155,8 +167,9 @@
       <customDisplay/>
       <disabled>0</disabled>
       <editor>PureText</editor>
+      <hint/>
       <name>disclaimer1</name>
-      <number>10</number>
+      <number>11</number>
       <picker>0</picker>
       <prettyName>disclaimer1</prettyName>
       <rows>5</rows>
@@ -171,8 +184,9 @@
       <customDisplay/>
       <disabled>0</disabled>
       <editor>PureText</editor>
+      <hint/>
       <name>disclaimer2</name>
-      <number>11</number>
+      <number>12</number>
       <picker>0</picker>
       <prettyName>disclaimer2</prettyName>
       <rows>5</rows>
@@ -185,6 +199,7 @@
     <foregroundColor>
       <customDisplay/>
       <disabled>0</disabled>
+      <hint/>
       <name>foregroundColor</name>
       <number>6</number>
       <picker>0</picker>
@@ -198,8 +213,9 @@
     <lang>
       <customDisplay/>
       <disabled>0</disabled>
+      <hint/>
       <name>lang</name>
-      <number>24</number>
+      <number>25</number>
       <picker>1</picker>
       <prettyName>Locale</prettyName>
       <size>30</size>
@@ -213,8 +229,9 @@
       <customDisplay/>
       <disabled>0</disabled>
       <editor>Text</editor>
+      <hint/>
       <name>marketingInfoBox</name>
-      <number>15</number>
+      <number>16</number>
       <picker>0</picker>
       <prettyName>marketingInfoBox</prettyName>
       <rows>5</rows>
@@ -227,8 +244,9 @@
     <marketingLabel>
       <customDisplay/>
       <disabled>0</disabled>
+      <hint/>
       <name>marketingLabel</name>
-      <number>22</number>
+      <number>23</number>
       <picker>0</picker>
       <prettyName>marketingLabel</prettyName>
       <size>30</size>
@@ -242,8 +260,9 @@
       <customDisplay/>
       <disabled>0</disabled>
       <editor>PureText</editor>
+      <hint/>
       <name>marketingScripts</name>
-      <number>18</number>
+      <number>19</number>
       <picker>0</picker>
       <prettyName>marketingScripts</prettyName>
       <rows>5</rows>
@@ -258,8 +277,9 @@
       <customDisplay/>
       <disabled>0</disabled>
       <editor>Text</editor>
+      <hint/>
       <name>necessaryInfoBox</name>
-      <number>12</number>
+      <number>13</number>
       <picker>0</picker>
       <prettyName>necessaryInfoBox</prettyName>
       <rows>5</rows>
@@ -272,8 +292,9 @@
     <necessaryLabel>
       <customDisplay/>
       <disabled>0</disabled>
+      <hint/>
       <name>necessaryLabel</name>
-      <number>19</number>
+      <number>20</number>
       <picker>0</picker>
       <prettyName>necessaryLabel</prettyName>
       <size>30</size>
@@ -285,8 +306,12 @@
     <opacity>
       <cache>0</cache>
       <customDisplay/>
+      <defaultValue/>
       <disabled>0</disabled>
       <displayType>select</displayType>
+      <freeText/>
+      <hint/>
+      <largeStorage>0</largeStorage>
       <multiSelect>0</multiSelect>
       <name>opacity</name>
       <number>7</number>
@@ -306,8 +331,12 @@
     <position>
       <cache>0</cache>
       <customDisplay/>
+      <defaultValue/>
       <disabled>0</disabled>
       <displayType>select</displayType>
+      <freeText/>
+      <hint/>
+      <largeStorage>0</largeStorage>
       <multiSelect>0</multiSelect>
       <name>position</name>
       <number>3</number>
@@ -329,8 +358,9 @@
       <customDisplay/>
       <disabled>0</disabled>
       <editor>Text</editor>
+      <hint/>
       <name>preferencesInfoBox</name>
-      <number>13</number>
+      <number>14</number>
       <picker>0</picker>
       <prettyName>preferencesInfoBox</prettyName>
       <rows>5</rows>
@@ -343,8 +373,9 @@
     <preferencesLabel>
       <customDisplay/>
       <disabled>0</disabled>
+      <hint/>
       <name>preferencesLabel</name>
-      <number>20</number>
+      <number>21</number>
       <picker>0</picker>
       <prettyName>preferencesLabel</prettyName>
       <size>30</size>
@@ -358,8 +389,9 @@
       <customDisplay/>
       <disabled>0</disabled>
       <editor>PureText</editor>
+      <hint/>
       <name>preferencesScripts</name>
-      <number>16</number>
+      <number>17</number>
       <picker>0</picker>
       <prettyName>preferencesScripts</prettyName>
       <rows>5</rows>
@@ -369,13 +401,31 @@
       <validationRegExp/>
       <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
     </preferencesScripts>
+    <rejectButtonText>
+      <contenttype>---</contenttype>
+      <customDisplay/>
+      <disabled>0</disabled>
+      <editor>Text</editor>
+      <hint/>
+      <name>rejectButtonText</name>
+      <number>9</number>
+      <picker>1</picker>
+      <prettyName>rejectButtonText</prettyName>
+      <rows>5</rows>
+      <size>40</size>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+    </rejectButtonText>
     <statisticsInfoBox>
       <contenttype>---</contenttype>
       <customDisplay/>
       <disabled>0</disabled>
       <editor>Text</editor>
+      <hint/>
       <name>statisticsInfoBox</name>
-      <number>14</number>
+      <number>15</number>
       <picker>0</picker>
       <prettyName>statisticsInfoBox</prettyName>
       <rows>5</rows>
@@ -388,8 +438,9 @@
     <statisticsLabel>
       <customDisplay/>
       <disabled>0</disabled>
+      <hint/>
       <name>statisticsLabel</name>
-      <number>21</number>
+      <number>22</number>
       <picker>0</picker>
       <prettyName>statisticsLabel</prettyName>
       <size>30</size>
@@ -403,8 +454,9 @@
       <customDisplay/>
       <disabled>0</disabled>
       <editor>PureText</editor>
+      <hint/>
       <name>statisticsScripts</name>
-      <number>17</number>
+      <number>18</number>
       <picker>0</picker>
       <prettyName>statisticsScripts</prettyName>
       <rows>5</rows>
@@ -417,8 +469,12 @@
     <type>
       <cache>0</cache>
       <customDisplay/>
+      <defaultValue/>
       <disabled>0</disabled>
       <displayType>select</displayType>
+      <freeText/>
+      <hint/>
+      <largeStorage>0</largeStorage>
       <multiSelect>0</multiSelect>
       <name>type</name>
       <number>2</number>
@@ -451,17 +507,29 @@
       <nameField/>
       <validationScript/>
       <sheet>
+        <cache>0</cache>
+        <classname/>
         <customDisplay/>
         <disabled>0</disabled>
+        <displayType>input</displayType>
+        <hint/>
+        <idField/>
+        <multiSelect>0</multiSelect>
         <name>sheet</name>
         <number>1</number>
-        <picker>0</picker>
+        <picker>1</picker>
         <prettyName>Sheet</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators/>
         <size>30</size>
+        <sort>none</sort>
+        <sql/>
         <unmodifiable>0</unmodifiable>
         <validationMessage/>
         <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+        <valueField/>
+        <classType>com.xpn.xwiki.objects.classes.PageClass</classType>
       </sheet>
     </class>
     <property>

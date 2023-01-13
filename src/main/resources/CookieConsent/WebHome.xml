@@ -139,6 +139,23 @@
         <validationRegExp/>
         <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
       </buttonText>
+      <rejectButtonText>
+        <contenttype>---</contenttype>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <editor>Text</editor>
+        <hint/>
+        <name>rejectButtonText</name>
+        <number>9</number>
+        <picker>1</picker>
+        <prettyName>rejectButtonText</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </rejectButtonText>
       <configButtonText>
         <contenttype>---</contenttype>
         <customDisplay/>
@@ -459,7 +476,7 @@
       <backgroundColor>#FFFFFF</backgroundColor>
     </property>
     <property>
-      <buttonText>I accept all Cookies</buttonText>
+      <buttonText>Accept all cookies</buttonText>
     </property>
     <property>
       <configButtonText>Configure</configButtonText>
@@ -505,6 +522,9 @@
     </property>
     <property>
       <preferencesScripts/>
+    </property>
+    <property>
+      <rejectButtonText>Reject</rejectButtonText>
     </property>
     <property>
       <statisticsInfoBox>Statistics related cookies or trackers which are optional and enabled by default and user to record anonymous statistics</statisticsInfoBox>
@@ -898,7 +918,7 @@
   box-shadow:         0 0 5px black;
 }
 
-#cookieConsentHide, #cookieConsentConfig, #cookieConsentOK {
+#cookieConsentHide, #cookieConsentConfig, #cookieConsentOK, #cookieConsentRejectAll {
   appearance: button;
   border: 2px solid @btn-primary-bg;
   transition: all 0.3s;
@@ -916,7 +936,7 @@
   }
 }
 
-#cookieConsentConfig {
+#cookieConsentConfig, #cookieConsentRejectAll {
   background-color: @btn-primary-color;
   color: @btn-primary-bg;
   &amp;:hover {
