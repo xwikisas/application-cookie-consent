@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc version="1.4" reference="CookieConsent.Translation" locale="it">
+  <web>CookieConsent</web>
+  <name>Translation</name>
+  <language>it</language>
+  <defaultLanguage>en</defaultLanguage>
+  <translation>1</translation>
+  <creator>xwiki:XWiki.Admin</creator>
+  <creationDate>1674652624000</creationDate>
+  <author>xwiki:XWiki.Admin</author>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <date>1674652969000</date>
+  <contentUpdateDate>1674652969000</contentUpdateDate>
+  <version>1.1</version>
+  <title/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>false</hidden>
+  <content>{{{## Configuration translation ##}}}
+CookieConsent.ConfigurationClass_active=Attivo
+CookieConsent.ConfigurationClass_active_0=no
+CookieConsent.ConfigurationClass_active_1=sì
+CookieConsent.ConfigurationClass_type=Tipo
+CookieConsent.ConfigurationClass_type_bar=bar
+CookieConsent.ConfigurationClass_type_box=box
+CookieConsent.ConfigurationClass_position=Posizione
+CookieConsent.ConfigurationClass_position_top=top
+CookieConsent.ConfigurationClass_position_bottom=in basso
+CookieConsent.ConfigurationClass_animation=Animazione
+CookieConsent.ConfigurationClass_animation_none=nessuno
+CookieConsent.ConfigurationClass_animation_slide=scorrevole
+CookieConsent.ConfigurationClass_animation_fade= dissolvenza
+CookieConsent.ConfigurationClass_backgroundColor=Colore sfondo
+CookieConsent.ConfigurationClass_foregroundColor=Colore primo piano
+CookieConsent.ConfigurationClass_opacity=Opacità
+CookieConsent.ConfigurationClass_buttonText=Testo del pulsante
+CookieConsent.ConfigurationClass_rejectButtonText=Testo del pulsante di rifiuto
+CookieConsent.ConfigurationClass_configButtonText=Testo del pulsante di configurazione
+CookieConsent.ConfigurationClass_disclaimer1=Disclaimer 1
+CookieConsent.ConfigurationClass_disclaimer2=Disclaimer 2
+CookieConsent.ConfigurationClass_necessaryInfoBox=Casella informativa necessaria
+CookieConsent.ConfigurationClass_preferencesInfoBox=Casella informativa sulle preferenze
+CookieConsent.ConfigurationClass_statisticsInfoBox=Casella informativa sulle statistiche
+CookieConsent.ConfigurationClass_marketingInfoBox=Casella informativa di marketing
+CookieConsent.ConfigurationClass_preferencesScripts=Scritture delle preferenze
+CookieConsent.ConfigurationClass_statisticsScripts=Scritture statistiche
+CookieConsent.ConfigurationClass_marketingScripts=Scritture di marketing
+CookieConsent.ConfigurationClass_necessaryLabel=Modifica dell'etichetta "necessario".
+CookieConsent.ConfigurationClass_preferencesLabel=Modifica dell'etichetta "preferenze".
+CookieConsent.ConfigurationClass_statisticsLabel=Modifica l'etichetta "statistiche".
+CookieConsent.ConfigurationClass_marketingLabel=Modifica l'etichetta "marketing".
+CookieConsent.ConfigurationClass_activeCookieTypes_necessary=Necessario
+CookieConsent.ConfigurationClass_activeCookieTypes_preferences=Preferenze
+CookieConsent.ConfigurationClass_activeCookieTypes_statistics=Statistiche
+CookieConsent.ConfigurationClass_activeCookieTypes_marketing=Marketing
+
+{{{## Disclaimer ##}}}
+cookieConsent.configure.title.mandatory=Necessario
+cookieConsent.configure.title.preferences=Preferenze
+cookieConsent.configure.title.statistics=Statistiche
+cookieConsent.configure.title.marketing=Marketing
+cookieConsent.crtUser.hasAccepted=L'utente corrente ha accettato i cookie
+
+{{{## Administration ##}}}
+cookieConsent.administration.applications=Consenso cookie GDPR
+cookieConsent.administration.heading=Estensione del consenso ai cookie conforme al GDPR
+cookieConsent.administration.description.intro=Questa estensione consente di impostare una schermata di consenso compatibile con il GDPR per i cookie e i tracker. In questo modo è possibile chiedere il consenso degli utenti per attivare o meno l'uso di cookie o tracker, a seconda dei diversi tipi di strumenti:
+cookieConsent.administration.description.necessary=necessario: cookie necessari, che sono obbligatori e non possono essere disabilitati.
+cookieConsent.administration.description.preferences=preferenze: cookie di preferenze o tracker che sono facoltativi e attivati per impostazione predefinita, ma utilizzati solo per ricordare le preferenze dell'utente
+cookieConsent.administration.description.statistics=statistiche: cookie o tracker relativi alle statistiche, facoltativi e abilitati per impostazione predefinita, utilizzati per registrare statistiche anonime.
+cookieConsent.administration.description.marketing=marketing: cookie o tracker relativi al marketing o ad altre attività che sono facoltativi e disabilitati per impostazione predefinita e possono registrare informazioni personali
+cookieConsent.administration.heading.general=generale
+cookieConsent.administration.heading.configurableText=Testo configurabile
+cookieConsent.administration.heading.trackers=Trackers e scripts
+cookieConsent.administration.heading.labels=Personalizza etichette
+cookieConsent.administration.trigger.heading=Innesca il pop-up manualmente
+cookieConsent.administration.trigger.content=Per creare un link/pulsante per aprire il pop-up dei cookie manualmente basta aggiungere l'id {{{**ResetCookies**}}} all'elemento cliccabile, ad esempio:
+cookieConsent.administration.trigger.example=Esempio
+cookieConsent.administration.trigger.linklabel=Reset opzioni cookie
+cookieConsent.administration.info.param=Il parametro deve essere {{{**preferenze**}}}, {{{**statistiche**}}} o {{{**marketing**}}}.
+cookieConsent.administration.info.notaccepted=L'utente corrente non ha ancora accettato la politica sui cookie.</content>
+</xwikidoc>
