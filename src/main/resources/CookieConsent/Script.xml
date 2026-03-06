@@ -255,13 +255,16 @@ define('cookie-consent', ['scriptaculous/effects'], function() {
       $("cookieConsentConfig").addEventListener("click", function(){
         $("cookieConsentContent").innerHTML = htmlContent2;
         $("cookieConsentOK").observe('click', function() {
-          let selectedElements = [];
-          for (i = 0; i &lt; activeCookieTypes.length; i++) {
-            var element = activeCookieTypes[i];
-            var label = this.settings[element + 'Label'];
+          let selectedElements = ["necessary"];
+          for (let i = 0; i &lt; activeCookieTypes.length; i++) {
+            let element = activeCookieTypes[i];
+
             if (element === 'necessary') {
-              label = this.settings.mandatoryLabel;
+              continue;
             }
+
+            let label = this.settings[element + 'Label'];
+
             if($('CookieButton' + label).checked) {
               selectedElements.push(element);
             }
