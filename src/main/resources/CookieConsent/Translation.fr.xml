@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.1" encoding="UTF-8"?>
 
 <!--
  * See the NOTICE file distributed with this work for additional
@@ -64,7 +64,7 @@ CookieConsent.ConfigurationClass_disclaimer2=Désistement 2
 CookieConsent.ConfigurationClass_necessaryInfoBox=Nécessaire Info Box
 CookieConsent.ConfigurationClass_preferencesInfoBox=Préférences Info Box
 CookieConsent.ConfigurationClass_statisticsInfoBox=Statistiques Info Box
-CookieConsent.ConfigurationClass_marketingInfoBox=Marketing Info Box
+CookieConsent.ConfigurationClass_marketingInfoBox=Box Info Marketing
 CookieConsent.ConfigurationClass_preferencesScripts=Scripts de Préférences
 CookieConsent.ConfigurationClass_statisticsScripts=Scripts de Statistiques
 CookieConsent.ConfigurationClass_marketingScripts=Scripts de Marketing
@@ -72,6 +72,10 @@ CookieConsent.ConfigurationClass_necessaryLabel=Modifier l'étiquette "nécessai
 CookieConsent.ConfigurationClass_preferencesLabel=Modifier l'étiquette "préférences"
 CookieConsent.ConfigurationClass_statisticsLabel=Modifier l'étiquette "statistiques"
 CookieConsent.ConfigurationClass_marketingLabel=Modifier l'étiquette "Marketing"
+CookieConsent.ConfigurationClass_activeCookieTypes_necessary=Nécessaire
+CookieConsent.ConfigurationClass_activeCookieTypes_preferences=Préférences
+CookieConsent.ConfigurationClass_activeCookieTypes_statistics=Statistiques
+CookieConsent.ConfigurationClass_activeCookieTypes_marketing=Marketing
 
 ## Disclaimer ##
 cookieConsent.configure.title.mandatory=Nécessaire
@@ -81,22 +85,25 @@ cookieConsent.configure.title.marketing=Marketing
 cookieConsent.crtUser.hasAccepted=Cookies actuels acceptés par l'utilisateur
 
 ## Administration ##
-cookieConsent.administration.applications=GDPR Cookie Consent
+
+
+## Administration ##
+cookieConsent.administration.applications=Consentement aux Cookies RGPD
 cookieConsent.administration.heading=Extension de consentement aux cookies conforme au RGPD
 cookieConsent.administration.description.intro=Cette extension vous permet de configurer un panneau de consentement conforme au RGPD pour les cookies et trackers sur votre site. Cela vous donnera la possibilité de demander le consentement de votre visiteur pour activer ou non l'utilisation de cookies ou de trackers selon les différents types d'outils :
-cookieConsent.administration.description.necessary=nécessaires: les cookies nécessaires à la fonctionnalité du site Web, qui sont obligatoires et ne peuvent pas être désactivés
-cookieConsent.administration.description.preferences=préférences: les cookies ou trackers de préférences sont optionnels et activés par défaut mais utilisés uniquement pour enregistrer vos préférences
-cookieConsent.administration.description.statistics=statistiques: les cookies ou trackers statistiques qui sont optionnels et activés par défaut et utilisés pour enregistrer des statistiques anonymes
-cookieConsent.administration.description.marketing=marketing: les cookies de marketing ou autres cookies ou trackers connexes sont optionnels et désactivés par défaut et peuvent enregistrer des informations personnelles
+cookieConsent.administration.description.necessary=nécessaires : les cookies nécessaires qui sont obligatoires et ne peuvent pas être désactivés
+cookieConsent.administration.description.preferences=préférences : les cookies ou trackers de préférences squi ont optionnels et activés par défaut mais utilisés uniquement pour enregistrer vos préférences
+cookieConsent.administration.description.statistics=statistiques : les cookies ou trackers statistiques qui sont optionnels et activés par défaut et utilisés pour enregistrer des statistiques anonymes
+cookieConsent.administration.description.marketing=marketing : les cookies de marketing ou autres cookies ou trackers qui sont optionnels et désactivés par défaut et peuvent enregistrer des informations personnelles
 cookieConsent.administration.heading.general=Général
 cookieConsent.administration.heading.configurableText=Texte à configurer
 cookieConsent.administration.heading.trackers=Trackers et scripts
 cookieConsent.administration.heading.labels=Personnaliser les libellés
 cookieConsent.administration.trigger.heading=Déclencher pop-up manuellement
-cookieConsent.administration.trigger.content=Afin de créer un lien/bouton pour ouvrir le pop-up cookie manuellement, il suffit d’ajouter l’identifiant
-ResetCookies à l’élément clicable. Par exemple:
+cookieConsent.administration.trigger.content=Afin de créer un lien/bouton pour ouvrir le pop-up cookie manuellement, il suffit d’ajouter l’identifiant **ResetCookies** à l'élément cliquable, par exemple :
 cookieConsent.administration.trigger.example=Exemple
 cookieConsent.administration.trigger.linklabel=Réinitialiser les options de cookies
 cookieConsent.administration.info.param=Le paramètre doit être **preferences**, **statistics** or **marketing**.
-cookieConsent.administration.info.notaccepted=L’utilisateur actuel n’a pas encore accepté les règles spécifiques pour les cookies.</content>
+cookieConsent.administration.info.notaccepted=L’utilisateur actuel n’a pas encore accepté les règles spécifiques pour les cookies
+</content>
 </xwikidoc>
