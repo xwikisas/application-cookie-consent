@@ -99,9 +99,9 @@ $xwiki.jsx.use('CookieConsent.ConfigurationSheet')
   **$services.localization.render('XWiki.XWikiPreferences_languages'):** ##
     #foreach($l in $supportedLang.split(','))
       #if ("${xcontext.locale}" == "${l}")
-        **[[$l&gt;&gt;||queryString="section=GDPR Cookie Consent Setup&amp;language=${l}"]]** ##
+        **[[$l&gt;&gt;||queryString="section=GDPR Cookie Consent&amp;language=${l}"]]** ##
       #else
-        [[$l&gt;&gt;||queryString="section=GDPR Cookie Consent Setup&amp;language=${l}"]] ##
+        [[$l&gt;&gt;||queryString="section=GDPR Cookie Consent&amp;language=${l}"]] ##
       #end
     #end
 

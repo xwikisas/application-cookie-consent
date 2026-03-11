@@ -772,7 +772,7 @@
       <displayInCategory/>
     </property>
     <property>
-      <displayInSection>GDPR Cookie Consent Setup</displayInSection>
+      <displayInSection>GDPR Cookie Consent</displayInSection>
     </property>
     <property>
       <heading>$services.localization.render('cookieConsent.administration.heading')</heading>
