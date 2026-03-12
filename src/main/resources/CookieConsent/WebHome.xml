@@ -875,7 +875,7 @@
       <propertiesToShow/>
     </property>
     <property>
-      <scope/>
+      <scope>WIKI+ALL_SPACES</scope>
     </property>
     <property>
       <sectionOrder/>
