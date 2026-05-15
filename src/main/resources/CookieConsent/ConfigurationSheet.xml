@@ -55,7 +55,6 @@ $services.localization.render('cookieConsent.administration.description.intro')
 
   **$services.localization.render('cookieConsent.administration.trigger.example'):** {{html}}&lt;a href="#" id='ResetCookies'&gt;$services.localization.render('cookieConsent.administration.trigger.linklabel')&lt;/a&gt;{{/html}}##
 
-$xwiki.jsx.use('CookieConsent.ConfigurationSheet')
 
 #if($hasAdmin)
   ####
@@ -229,38 +228,10 @@ $xwiki.jsx.use('CookieConsent.ConfigurationSheet')
       </use>
     </class>
     <property>
-      <cache>forbid</cache>
+      <cache>long</cache>
     </property>
     <property>
-      <code>#set ($settings = $xwiki.getDocument('CookieConsent.WebHome').getObject('CookieConsent.ConfigurationClass', 'lang', "$xcontext.locale"))
-#if (!$settings)
-  #set ($settings = $xwiki.getDocument('CookieConsent.WebHome').getObject('CookieConsent.ConfigurationClass'))
-#end
-#if($settings.getProperty('active').value == 1)
-  #set($labels = ['necessaryLabel','preferencesLabel','statisticsLabel','marketingLabel'])
-    #if("$!{settings.getProperty($labels[0]).value}" != '')
-      #set($displayLabel0 = $!{settings.getProperty($labels[0]).value})
-    #else
-      #set($displayLabel0 = $services.localization.render('cookieConsent.configure.title.mandatory'))
-    #end
-    #if("$!{settings.getProperty($labels[1]).value}" != '')
-      #set($displayLabel1 = $!{settings.getProperty($labels[1]).value})
-    #else
-      #set($displayLabel1 = $services.localization.render('cookieConsent.configure.title.preferences'))
-    #end
-    #if("$!{settings.getProperty($labels[2]).value}" != '')
-      #set($displayLabel2 = $!{settings.getProperty($labels[2]).value})
-    #else
-      #set($displayLabel2 = $services.localization.render('cookieConsent.configure.title.statistics'))
-    #end
-    #if("$!{settings.getProperty($labels[3]).value}" != '')
-      #set($displayLabel3 = $!{settings.getProperty($labels[3]).value})
-    #else
-      #set($displayLabel3 = $services.localization.render('cookieConsent.configure.title.marketing'))
-    #end
-#end
-
-require(['jquery'], function($) {
+      <code>require(['jquery'], function($) {
   $(document).ready(function() {
     let getCookie = function(key) {
       let keyEquals = key + "=";
@@ -277,13 +248,13 @@ require(['jquery'], function($) {
     }
 
     let setCookie = function(key, value, days) {
-      var setValue      = key + '=' + encodeURIComponent(new String(value));
+      var setValue = key + '=' + encodeURIComponent(new String(value));
       var setExpiration = "";
 
       if (days) {
         let date = new Date();
         date.setTime(date.getTime() + (days*24*60*60*1000));
-        let setExpiration = "; expires=" + date.toGMTString();
+        setExpiration = "; expires=" + date.toGMTString();
       }
 
       var cookieString = setValue + setExpiration + ";path=/";
@@ -317,28 +288,12 @@ require(['jquery'], function($) {
         return;
       }
 
-      let settings =
-        {
-          'active' : "$settings.getProperty('active').value",
-          'type' : "$settings.getProperty('type').value",
-          'position' : "$settings.getProperty('position').value",
-          'animation' : "$settings.getProperty('animation').value",
-          'buttonText' : "$escapetool.javascript($!settings.getProperty('buttonText').value)",
-          'rejectButtonText' : "$escapetool.javascript($!settings.getProperty('rejectButtonText').value)",
-          'configButtonText' : "$escapetool.javascript($!settings.getProperty('configButtonText').value)",
-          'disclaimer1' : "$escapetool.javascript($!settings.disclaimer1)",
-          'disclaimer2' : "$escapetool.javascript($!settings.disclaimer2)",
-          'necessaryInfoBox' : "$escapetool.javascript($settings.getProperty('necessaryInfoBox').value.trim())",
-          'preferencesInfoBox' : "$escapetool.javascript($settings.getProperty('preferencesInfoBox').value.trim())",
-          'statisticsInfoBox' : "$escapetool.javascript($settings.getProperty('statisticsInfoBox').value.trim())",
-          'marketingInfoBox' : "$escapetool.javascript($settings.getProperty('marketingInfoBox').value.trim())",
-          'mandatoryLabel' : "$escapetool.javascript($displayLabel0)",
-          'preferencesLabel' : "$escapetool.javascript($displayLabel1)",
-          'statisticsLabel' : "$escapetool.javascript($displayLabel2)",
-          'marketingLabel' : "$escapetool.javascript($displayLabel3)",
-          'activeCookieTypes' : "$stringtool.join($settings.getValue('activeCookieTypes'), ',')"
-       };
+      let configElement = document.getElementById('cookie-consent-config');
+      if (!configElement) {
+        return;
+      }
 
+      let settings = JSON.parse(configElement.textContent);
       if (settings.active == '0' || !settings.activeCookieTypes) {
         return;
       }
@@ -442,10 +397,202 @@ require(['jquery'], function($) {
       <name>Javascript</name>
     </property>
     <property>
-      <parse>1</parse>
+      <parse/>
     </property>
     <property>
       <use>always</use>
+    </property>
+  </object>
+  <object>
+    <name>CookieConsent.ConfigurationSheet</name>
+    <number>0</number>
+    <className>XWiki.UIExtensionClass</className>
+    <guid>788576de-5101-4425-bcc3-d0665cf8186d</guid>
+    <class>
+      <name>XWiki.UIExtensionClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <async_cached>
+        <defaultValue>0</defaultValue>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType/>
+        <name>async_cached</name>
+        <number>3</number>
+        <prettyName>Cached</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </async_cached>
+      <async_context>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <freeText>forbidden</freeText>
+        <largeStorage>0</largeStorage>
+        <multiSelect>1</multiSelect>
+        <name>async_context</name>
+        <number>4</number>
+        <prettyName>Context elements</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator>, </separator>
+        <separators>|, </separators>
+        <size>5</size>
+        <unmodifiable>0</unmodifiable>
+        <values>action=Action|doc.reference=Document|doc.revision|icon.theme=Icon theme|locale=Language|rendering.defaultsyntax=Default syntax|rendering.restricted=Restricted|rendering.targetsyntax=Target syntax|request.base=Request base URL|request.cookies|request.headers|request.parameters=Request parameters|request.remoteAddr|request.session|request.url=Request URL|request.wiki=Request wiki|sheet|user=User|wiki=Wiki</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </async_context>
+      <async_enabled>
+        <defaultValue>0</defaultValue>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType/>
+        <name>async_enabled</name>
+        <number>2</number>
+        <prettyName>Asynchronous rendering</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </async_enabled>
+      <content>
+        <disabled>0</disabled>
+        <editor>Text</editor>
+        <name>content</name>
+        <number>1</number>
+        <prettyName>Executed Content</prettyName>
+        <restricted>0</restricted>
+        <rows>25</rows>
+        <size>120</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </content>
+      <extensionPointId>
+        <disabled>0</disabled>
+        <name>extensionPointId</name>
+        <number>5</number>
+        <prettyName>Extension Point ID</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </extensionPointId>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>6</number>
+        <prettyName>Extension ID</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parameters>
+        <contenttype>PureText</contenttype>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>parameters</name>
+        <number>7</number>
+        <prettyName>Extension Parameters</prettyName>
+        <restricted>0</restricted>
+        <rows>10</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </parameters>
+      <scope>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <freeText>forbidden</freeText>
+        <largeStorage>0</largeStorage>
+        <multiSelect>0</multiSelect>
+        <name>scope</name>
+        <number>8</number>
+        <prettyName>Extension Scope</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>wiki=Current Wiki|user=Current User|global=Global</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </scope>
+    </class>
+    <property>
+      <async_cached>0</async_cached>
+    </property>
+    <property>
+      <async_context/>
+    </property>
+    <property>
+      <async_enabled>0</async_enabled>
+    </property>
+    <property>
+      <content>{{velocity}}
+#set ($settings = $xwiki.getDocument('CookieConsent.WebHome').getObject('CookieConsent.ConfigurationClass', 'lang', "$xcontext.locale"))
+#if (!$settings)
+  #set ($settings = $xwiki.getDocument('CookieConsent.WebHome').getObject('CookieConsent.ConfigurationClass'))
+#end
+#if($settings.getProperty('active').value == 1)
+  #set($labels = ['necessaryLabel','preferencesLabel','statisticsLabel','marketingLabel'])
+  #if("$!{settings.getProperty($labels[0]).value}" != '')
+    #set($mandatoryLabel = $!{settings.getProperty($labels[0]).value})
+  #else
+    #set($mandatoryLabel = $services.localization.render('cookieConsent.configure.title.mandatory'))
+  #end
+  #if("$!{settings.getProperty($labels[1]).value}" != '')
+    #set($preferencesLabel = $!{settings.getProperty($labels[1]).value})
+  #else
+    #set($preferencesLabel = $services.localization.render('cookieConsent.configure.title.preferences'))
+  #end
+  #if("$!{settings.getProperty($labels[2]).value}" != '')
+    #set($statisticsLabel = $!{settings.getProperty($labels[2]).value})
+  #else
+    #set($statisticsLabel = $services.localization.render('cookieConsent.configure.title.statistics'))
+  #end
+  #if("$!{settings.getProperty($labels[3]).value}" != '')
+    #set($marketingLabel = $!{settings.getProperty($labels[3]).value})
+  #else
+    #set($marketingLabel = $services.localization.render('cookieConsent.configure.title.marketing'))
+  #end
+  #set ($config = {
+      'active' : $settings.getProperty('active').value,
+      'type' : $settings.getProperty('type').value,
+      'position' : $settings.getProperty('position').value,
+      'animation' : $settings.getProperty('animation').value,
+      'buttonText' : $!settings.getProperty('buttonText').value,
+      'rejectButtonText' : $!settings.getProperty('rejectButtonText').value,
+      'configButtonText' : $!settings.getProperty('configButtonText').value,
+      'disclaimer1' : $!settings.disclaimer1,
+      'disclaimer2' : $!settings.disclaimer2,
+      'necessaryInfoBox' : $settings.getProperty('necessaryInfoBox').value.trim(),
+      'preferencesInfoBox' : $settings.getProperty('preferencesInfoBox').value.trim(),
+      'statisticsInfoBox' : $settings.getProperty('statisticsInfoBox').value.trim(),
+      'marketingInfoBox' : $settings.getProperty('marketingInfoBox').value.trim(),
+      'mandatoryLabel' : $mandatoryLabel,
+      'preferencesLabel' : $preferencesLabel,
+      'statisticsLabel' : $statisticsLabel,
+      'marketingLabel' : $marketingLabel,
+      'activeCookieTypes' : $stringtool.join($settings.getValue('activeCookieTypes'), ',')
+    })
+  {{html clean="false"}}
+  &lt;script id="cookie-consent-config" type="application/json"&gt;$jsontool.serialize($config)&lt;/script&gt;
+  {{/html}}
+#end
+{{/velocity}}</content>
+    </property>
+    <property>
+      <extensionPointId>org.xwiki.platform.html.head</extensionPointId>
+    </property>
+    <property>
+      <name>CookieConsent.SettingsUIX</name>
+    </property>
+    <property>
+      <parameters/>
+    </property>
+    <property>
+      <scope/>
     </property>
   </object>
 </xwikidoc>
