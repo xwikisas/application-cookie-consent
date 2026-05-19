@@ -69,20 +69,26 @@
   #set($hasMarketing = "#gdprHas('marketing')")
   #set($cookieSetupDoc = $xwiki.getDocument('CookieConsent.WebHome'))
   #set($setupObject = $cookieSetupDoc.getObject('CookieConsent.ConfigurationClass', 'lang', $xcontext.locale))
-  #set($preferencesScripts = $setupObject.getProperty('preferencesScripts').value)
-  #set($statisticsScripts = $setupObject.getProperty('statisticsScripts').value)
-  #set($marketingScripts = $setupObject.getProperty('marketingScripts').value)
-  {{html clean="false"}}
-    #if("$!{hasPreferences.trim()}" == 'true')
-      $!preferencesScripts
-    #end
-    #if("$!{hasStatistics.trim()}" == 'true')
-      $!statisticsScripts
-    #end
-    #if("$!{hasMarketing.trim()}" == 'true')
-      $!marketingScripts
-    #end
-  {{/html}}
+  #if("$!{setupObject}" == '')
+    ## fallback to default locale object
+    #set($setupObject = $cookieSetupDoc.getObject('CookieConsent.ConfigurationClass'))
+  #end
+  #if("$!{setupObject}" != '')
+    #set($preferencesScripts = $setupObject.getProperty('preferencesScripts').value)
+    #set($statisticsScripts = $setupObject.getProperty('statisticsScripts').value)
+    #set($marketingScripts = $setupObject.getProperty('marketingScripts').value)
+    {{html clean="false"}}
+      #if("$!{hasPreferences.trim()}" == 'true')
+        $!preferencesScripts
+      #end
+      #if("$!{hasStatistics.trim()}" == 'true')
+        $!statisticsScripts
+      #end
+      #if("$!{hasMarketing.trim()}" == 'true')
+        $!marketingScripts
+      #end
+    {{/html}}
+  #end
 #end
 {{/velocity}}</content>
   <object>

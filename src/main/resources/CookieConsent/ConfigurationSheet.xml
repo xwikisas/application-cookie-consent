@@ -328,8 +328,8 @@ $services.localization.render('cookieConsent.administration.description.intro')
 
         htmlContent2 = htmlContent2
                      + '&lt;div class="CookieSelectButtonWrapper" title="' + infoBox + '"&gt;'
-                     + '&lt;label for="CookieButton' + label + '"&gt;'
-                     + '&lt;input id="CookieButton' + label + '" class="CookieButton" tabindex="1" ' + disabled +' type="checkbox"&gt;'
+                     + '&lt;label for="CookieButton_' + element + '"&gt;'
+                     + '&lt;input id="CookieButton_' + element + '" class="CookieButton" tabindex="1" ' + disabled +' type="checkbox"&gt;'
                      + label + '&lt;/label&gt;'
                      + '&lt;/div&gt;';
       }
@@ -365,9 +365,7 @@ $services.localization.render('cookieConsent.administration.description.intro')
               continue;
             }
 
-            let label = settings[element + 'Label'];
-
-            if ($('#CookieButton' + label).is(':checked')) {
+            if ($('#CookieButton_' + element).is(':checked')) {
               selectedElements.push(element);
             }
           }

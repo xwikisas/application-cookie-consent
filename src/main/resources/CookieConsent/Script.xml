@@ -269,7 +269,7 @@
       {{info}}The parameter should be **preferences**, **statistics** or **marketing**.{{/info}}
     #end
   #else
-    $gdprSettings
+    $escapetool.xml($gdprSettings)
   #end
 #else
   {{info}}The current user has not yet accepted the cookie policy{{/info}}
