@@ -643,7 +643,7 @@ $services.localization.render('cookieConsent.administration.description.intro')
       'statisticsLabel' : $statisticsLabel,
       'marketingLabel' : $marketingLabel,
       'activeCookieTypes' : $stringtool.join($settings.getValue('activeCookieTypes'), ','),
-      'okButtonText' : $services.localization.render('cookieConsent.configure.button.ok')
+      'okButtonText' : $services.localization.render('cookieConsent.configure.okButtonText')
     })
   {{html clean="false"}}
   &lt;script id="cookie-consent-config" type="application/json"&gt;$jsontool.serialize($config)&lt;/script&gt;
