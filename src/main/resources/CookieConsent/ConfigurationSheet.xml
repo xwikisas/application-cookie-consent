@@ -283,17 +283,97 @@ $services.localization.render('cookieConsent.administration.description.intro')
       }
     };
 
+    let generateCookieConsentInitial = function (settings) {
+      let content = $('&lt;div/&gt;', {
+        id: 'cookieConsentContent',
+        class: 'col-md-8'
+      });
+
+      content.append(settings.disclaimer1);
+
+      let hideBtn = $('&lt;button/&gt;', {
+        class: 'button',
+        role: 'button',
+        name: 'cookieConsentHide',
+        id: 'cookieConsentHide'
+      }).text(settings.buttonText);
+
+      let rejectBtn = $('&lt;button/&gt;', {
+        class: 'button',
+        role: 'button',
+        name: 'cookieConsentRejectAll',
+        id: 'cookieConsentRejectAll'
+      }).text(settings.rejectButtonText);
+
+      let configBtn = $('&lt;button/&gt;', {
+        class: 'button',
+        role: 'button',
+        name: 'cookieConsentConfig',
+        id: 'cookieConsentConfig'
+      }).text(settings.configButtonText);
+
+      content.append(hideBtn, rejectBtn, configBtn);
+
+      let colLeft = $('&lt;div/&gt;', { class: 'col-md-2' });
+      let colRight = $('&lt;div/&gt;', { class: 'col-md-2' });
+
+      let row = $('&lt;div/&gt;');
+
+      row.append(colLeft, content, colRight);
+
+      return row;
+    }
+
+    let generateCookieConsentPane = function (settings) {
+      let activeCookieTypes = settings.activeCookieTypes.split(',');
+
+      let cookiePane = $('&lt;div/&gt;', { id: 'CookieSelectPane' });
+
+      for (let i = 0; i &lt; activeCookieTypes.length; i++) {
+        let element = activeCookieTypes[i];
+        let label = settings[element + 'Label'];
+        let infoBox = settings[element + 'InfoBox'];
+
+        let input = $('&lt;input/&gt;', {
+          id: 'CookieButton_' + element,
+          class: 'CookieButton',
+          tabindex: 1,
+          type: 'checkbox'
+        });
+
+        if (element === 'necessary') {
+          input.prop('disabled', true).prop('checked', true);
+          label = settings.mandatoryLabel;
+        }
+
+        let wrapper = $('&lt;div/&gt;', {
+          class: 'CookieSelectButtonWrapper',
+          title: infoBox
+        });
+
+        let lbl = $('&lt;label/&gt;', {
+          for: 'CookieButton_' + element
+        });
+
+        lbl.append(input).append(label);
+        wrapper.append(lbl);
+        cookiePane.append(wrapper);
+      }
+
+      return cookiePane;
+    }
+
     let showDisclaimer = async function() {
       if (getCookie('cookieConsent')) {
         return;
       }
 
-      let configElement = document.getElementById('cookie-consent-config');
-      if (!configElement) {
+      let configElement = $('#cookie-consent-config');
+      if (!configElement.length || !configElement.is('script[type="application/json"]')) {
         return;
       }
 
-      let settings = JSON.parse(configElement.textContent);
+      let settings = JSON.parse(configElement.prop('textContent'));
       if (settings.active == '0' || !settings.activeCookieTypes) {
         return;
       }
@@ -302,60 +382,45 @@ $services.localization.render('cookieConsent.administration.description.intro')
 
       var activeCookieTypes = settings.activeCookieTypes.split(',');
 
-      var htmlContent1 = settings.disclaimer1
-                       + '&lt;button class="button" role="button" name="cookieConsentHide" id="cookieConsentHide"&gt;'
-                       + settings.buttonText
-                       + '&lt;/button&gt;'
-                       + '&lt;button class="button" role="button" name="cookieConsentRejectAll" id="cookieConsentRejectAll"&gt;'
-                       + settings.rejectButtonText
-                       + '&lt;/button&gt;'
-                       + '&lt;button class="button" role="button" name="cookieConsentConfig" id="cookieConsentConfig"&gt;'
-                       + settings.configButtonText
-                       + '&lt;/button&gt;';
+      let cookieConsent = $('&lt;div/&gt;', {
+        id: 'cookieConsent',
+        css: { display: 'none' }
+      });
 
-      var htmlContent2 = settings.disclaimer2 + '&lt;div id="CookieSelectPane"&gt;';
+      let row = generateCookieConsentInitial(settings);
+      cookieConsent.append(row);
 
-      for (let i = 0; i &lt; activeCookieTypes.length; i++) {
-        let element = activeCookieTypes[i];
-        let label = settings[element + 'Label'];
-        let infoBox = settings[element + 'InfoBox'];
-        let disabled = '';
+      $('#xwikimaincontainerinner').before(cookieConsent);
 
-        if (element === 'necessary') {
-          label = settings.mandatoryLabel;
-          disabled = 'disabled="disabled" checked="checked"';
-        }
-
-        htmlContent2 = htmlContent2
-                     + '&lt;div class="CookieSelectButtonWrapper" title="' + infoBox + '"&gt;'
-                     + '&lt;label for="CookieButton_' + element + '"&gt;'
-                     + '&lt;input id="CookieButton_' + element + '" class="CookieButton" tabindex="1" ' + disabled +' type="checkbox"&gt;'
-                     + label + '&lt;/label&gt;'
-                     + '&lt;/div&gt;';
-      }
-
-      htmlContent2 = htmlContent2 + '&lt;/div&gt;&lt;button class="button" role="button" name="cookieConsentOK" id="cookieConsentOK"&gt;OK&lt;/button&gt;';
-
-      var html = '&lt;div id="cookieConsent" style="display: none;"&gt;'
-               + '&lt;div class="col-md-2"&gt;&lt;/div&gt;'
-               + '&lt;div id="cookieConsentContent" class="col-md-8"&gt;'
-               + htmlContent1
-               + '&lt;/div&gt;'
-               + '&lt;div class="col-md-2"&gt;&lt;/div&gt;'
-               + '&lt;/div&gt;'
-               + '&lt;/div&gt;';
-
-      $('#xwikimaincontainerinner').before(html);
       $("#cookieConsentHide").on('click', function() {
         hideDisclaimer(activeCookieTypes, settings.animation);
       });
+
       $("#cookieConsentRejectAll").on("click", function() {
         setCookie('cookieConsent', 'hide', 365);
         clearCookie('gdprSettings');
         animation('hide', 'cookieConsent', settings.animation);
-      }),
+      });
+
       $("#cookieConsentConfig").on("click", function() {
-        $("#cookieConsentContent").html(htmlContent2);
+        let configContent = $('&lt;div/&gt;');
+        configContent.append(settings.disclaimer2);
+
+        let cookiePane = generateCookieConsentPane(settings);
+
+        configContent.append(cookiePane);
+
+        let okBtn = $('&lt;button/&gt;', {
+          class: 'button',
+          role: 'button',
+          name: 'cookieConsentOK',
+          id: 'cookieConsentOK'
+        }).text(settings.okButtonText);
+
+        configContent.append(okBtn);
+
+        $("#cookieConsentContent").empty().append(configContent);
+
         $("#cookieConsentOK").off('click').on('click', function() {
           let selectedElements = ["necessary"];
           for (let i = 0; i &lt; activeCookieTypes.length; i++) {
@@ -535,25 +600,30 @@ $services.localization.render('cookieConsent.administration.description.intro')
 #if($settings.getProperty('active').value == 1)
   #set($labels = ['necessaryLabel','preferencesLabel','statisticsLabel','marketingLabel'])
   #if("$!{settings.getProperty($labels[0]).value}" != '')
-    #set($mandatoryLabel = $!{settings.getProperty($labels[0]).value})
+    #set($mandatoryLabel = $escapetool.xml($!{settings.getProperty($labels[0]).value}))
   #else
-    #set($mandatoryLabel = $services.localization.render('cookieConsent.configure.title.mandatory'))
+    #set($mandatoryLabel = $escapetool.xml($services.localization.render('cookieConsent.configure.title.mandatory')))
   #end
   #if("$!{settings.getProperty($labels[1]).value}" != '')
-    #set($preferencesLabel = $!{settings.getProperty($labels[1]).value})
+    #set($preferencesLabel = $escapetool.xml($!{settings.getProperty($labels[1]).value}))
   #else
-    #set($preferencesLabel = $services.localization.render('cookieConsent.configure.title.preferences'))
+    #set($preferencesLabel = $escapetool.xml($services.localization.render('cookieConsent.configure.title.preferences')))
   #end
   #if("$!{settings.getProperty($labels[2]).value}" != '')
-    #set($statisticsLabel = $!{settings.getProperty($labels[2]).value})
+    #set($statisticsLabel = $escapetool.xml($!{settings.getProperty($labels[2]).value}))
   #else
-    #set($statisticsLabel = $services.localization.render('cookieConsent.configure.title.statistics'))
+    #set($statisticsLabel = $escapetool.xml($services.localization.render('cookieConsent.configure.title.statistics')))
   #end
   #if("$!{settings.getProperty($labels[3]).value}" != '')
-    #set($marketingLabel = $!{settings.getProperty($labels[3]).value})
+    #set($marketingLabel = $escapetool.xml($!{settings.getProperty($labels[3]).value}))
   #else
-    #set($marketingLabel = $services.localization.render('cookieConsent.configure.title.marketing'))
+    #set($marketingLabel = $escapetool.xml($services.localization.render('cookieConsent.configure.title.marketing')))
   #end
+
+  #set($disclaimer1Parsed = $services.rendering.parse($settings.getProperty('disclaimer1').value, 'xwiki/2.1'))
+  #set($disclaimer1Rendered = $services.rendering.render($disclaimer1Parsed, 'html/5.0'))
+  #set($disclaimer2Parsed = $services.rendering.parse($settings.getProperty('disclaimer2').value, 'xwiki/2.1'))
+  #set($disclaimer2Rendered = $services.rendering.render($disclaimer2Parsed, 'html/5.0'))
   #set ($config = {
       'active' : $settings.getProperty('active').value,
       'type' : $settings.getProperty('type').value,
@@ -562,8 +632,8 @@ $services.localization.render('cookieConsent.administration.description.intro')
       'buttonText' : $!settings.getProperty('buttonText').value,
       'rejectButtonText' : $!settings.getProperty('rejectButtonText').value,
       'configButtonText' : $!settings.getProperty('configButtonText').value,
-      'disclaimer1' : $!settings.disclaimer1,
-      'disclaimer2' : $!settings.disclaimer2,
+      'disclaimer1' : $!disclaimer1Rendered,
+      'disclaimer2' : $!disclaimer2Rendered,
       'necessaryInfoBox' : $settings.getProperty('necessaryInfoBox').value.trim(),
       'preferencesInfoBox' : $settings.getProperty('preferencesInfoBox').value.trim(),
       'statisticsInfoBox' : $settings.getProperty('statisticsInfoBox').value.trim(),
@@ -572,7 +642,8 @@ $services.localization.render('cookieConsent.administration.description.intro')
       'preferencesLabel' : $preferencesLabel,
       'statisticsLabel' : $statisticsLabel,
       'marketingLabel' : $marketingLabel,
-      'activeCookieTypes' : $stringtool.join($settings.getValue('activeCookieTypes'), ',')
+      'activeCookieTypes' : $stringtool.join($settings.getValue('activeCookieTypes'), ','),
+      'okButtonText' : $services.localization.render('cookieConsent.configure.button.ok')
     })
   {{html clean="false"}}
   &lt;script id="cookie-consent-config" type="application/json"&gt;$jsontool.serialize($config)&lt;/script&gt;

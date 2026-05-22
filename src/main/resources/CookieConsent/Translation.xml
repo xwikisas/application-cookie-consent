@@ -80,6 +80,7 @@ cookieConsent.configure.title.preferences=Preferences
 cookieConsent.configure.title.statistics=Statistics
 cookieConsent.configure.title.marketing=Marketing
 cookieConsent.crtUser.hasAccepted=Current user accepted cookies
+cookieConsent.configure.okButtonText=Ok
 
 ## Administration ##
 
