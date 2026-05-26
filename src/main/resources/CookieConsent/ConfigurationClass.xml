@@ -112,7 +112,12 @@
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </animation>
     <backgroundColor>
-      <customDisplay/>
+      <customDisplay>{{velocity}}
+{{html clean="false"}}
+#set ($colorPickerParams = { 'id':"${prefix}$name", 'name': "${prefix}$name", 'value': "$value" })
+#colorPicker($colorPickerParams)
+{{/html}}
+{{/velocity}}</customDisplay>
       <disabled>0</disabled>
       <hint/>
       <name>backgroundColor</name>
@@ -194,7 +199,12 @@
       <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
     </disclaimer2>
     <foregroundColor>
-      <customDisplay/>
+      <customDisplay>{{velocity}}
+{{html clean="false"}}
+#set ($colorPickerParams = { 'id':"${prefix}$name", 'name': "${prefix}$name", 'value': "$value" })
+#colorPicker($colorPickerParams)
+{{/html}}
+{{/velocity}}</customDisplay>
       <disabled>0</disabled>
       <hint/>
       <name>foregroundColor</name>
