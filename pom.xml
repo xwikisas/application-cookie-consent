@@ -29,19 +29,10 @@
   </parent>
   <groupId>com.xwiki.cookie-consent</groupId>
   <artifactId>application-cookie-consent</artifactId>
-  <name>GDPR Cookie Consent</name>
   <version>2.0-SNAPSHOT</version>
-  <packaging>xar</packaging>
+  <name>GDPR Cookie Consent</name>
+  <packaging>pom</packaging>
   <description>Cookie consent popup with different configuration options.</description>
-  <properties>
-    <xwiki.version>15.10</xwiki.version>
-    <!-- Name to display by the Extension Manager -->
-    <xwiki.extension.name>GDPR Cookie Consent</xwiki.extension.name>
-    <!-- Sets value for the categories column on e.x.o -->
-    <xwiki.extension.category>application</xwiki.extension.category>
-    <!-- Don't run CLIRR here since there's no Java code. -->
-    <xwiki.clirr.skip>true</xwiki.clirr.skip>
-  </properties>
   <issueManagement>
     <system>GitHub</system>
     <url>https://github.com/xwikisas/application-cookie-consent/issues</url>
@@ -69,7 +60,6 @@
       </snapshots>
     </repository>
   </repositories>
-
   <build>
     <plugins>
       <plugin>
@@ -86,4 +76,8 @@
       </plugin>
     </plugins>
   </build>
+  <modules>
+    <module>application-cookie-consent-test</module>
+    <module>application-cookie-consent-ui</module>
+  </modules>
 </project>
