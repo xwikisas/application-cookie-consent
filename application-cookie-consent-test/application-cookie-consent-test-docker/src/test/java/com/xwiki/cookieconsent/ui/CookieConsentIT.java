@@ -24,20 +24,25 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.xwiki.model.reference.DocumentReference;
 import org.xwiki.test.docker.junit5.ExtensionOverride;
-import org.xwiki.test.docker.junit5.TestConfiguration;
 import org.xwiki.test.docker.junit5.UITest;
 import org.xwiki.test.ui.TestUtils;
 import org.xwiki.user.test.po.PreferencesEditPage;
 import org.xwiki.user.test.po.PreferencesUserProfilePage;
 import org.xwiki.user.test.po.ProfileUserProfilePage;
 
+import com.xwiki.cookieconsent.po.CookieConsentPage;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 /**
- * UI tests for the PDF Viewer Macro.
+ * UI tests for the GDPR Cookie Consent Macro.
  *
  * @version $Id$
  * @since 2.7
  */
-@UITest(extensionOverrides = { @ExtensionOverride(extensionId = "com.google.code.findbugs:jsr305", overrides = {
+@UITest(properties = { "com.xpn.xwiki.plugin.skinx.JsResourceSkinExtensionPlugin, "
+    + "com.xpn.xwiki.plugin.skinx.CssResourceSkinExtensionPlugin", }, extensionOverrides = {
+    @ExtensionOverride(extensionId = "com.google.code.findbugs:jsr305", overrides = {
     "features=com.google.code.findbugs:annotations" }),
     @ExtensionOverride(extensionId = "org.bouncycastle:bcprov-jdk18on", overrides = {
         "features=org.bouncycastle:bcprov-jdk15on" }),
@@ -51,7 +56,7 @@ public class CookieConsentIT
     private final DocumentReference testPage = new DocumentReference("xwiki", "Main", "testPage");
 
     @BeforeAll
-    void setup(TestUtils testUtils)
+    void setup(TestUtils testUtils) throws Exception
     {
         testUtils.createAdminUser();
         testUtils.loginAsSuperAdmin();
@@ -63,14 +68,68 @@ public class CookieConsentIT
         PreferencesEditPage preferencesEditPage = preferencesPage.editPreferences();
         preferencesEditPage.setAdvancedUserType();
         preferencesEditPage.clickSaveAndView();
+        testUtils.setWikiPreference("default_language", "en");
+
+        testUtils.createUser("UserTest", "UserTest", "");
 
         testUtils.loginAsAdmin();
+
     }
 
     @Test
     @Order(1)
-    void test(TestUtils setup, TestConfiguration testConfiguration)
+    void configureGeneralSettings(TestUtils testUtils)
     {
-        setup.createPage(testPage, "This is a test page");
+        CookieConsentPage page = CookieConsentPage.gotoPage();
+
+        page.setActive(true).setType("box").setPosition("top").setAnimation("fade").setBackgroundColor("#000000")
+            .setForegroundColor("#FFFFFF").setOpacity("0.8");
+
+        page.clickSave();
+
+        testUtils.login("UserTest", "UserTest");
+        testUtils.gotoPage(testPage);
+        assertEquals(2, 3);
+    }
+
+    //@Test
+    @Order(2)
+    void configureConfigurableTexts()
+    {
+
+        CookieConsentPage page = CookieConsentPage.gotoPage();
+
+        page.setButtonText("Accept everything").setRejectButtonText("Decline").setConfigButtonText("Manage preferences")
+            .setDisclaimer1("Updated disclaimer 1 text for testing purposes.")
+            .setDisclaimer2("Updated disclaimer 2 text for testing purposes.")
+            .setNecessaryInfoBox("Updated necessary info box.").setPreferencesInfoBox("Updated preferences info box.")
+            .setStatisticsInfoBox("Updated statistics info box.").setMarketingInfoBox("Updated marketing info box.");
+
+        page.clickSave();
+    }
+
+    //@Test
+    @Order(3)
+    void configureTrackersAndScripts()
+    {
+        CookieConsentPage page = CookieConsentPage.gotoPage();
+
+        page.setPreferencesScripts("console.log('preferences script');")
+            .setStatisticsScripts("console.log('statistics script');")
+            .setMarketingScripts("console.log('marketing script');");
+
+        page.clickSave();
+    }
+
+    //@Test
+    @Order(4)
+    void configureLabelsAndActiveCookieTypes()
+    {
+        CookieConsentPage page = CookieConsentPage.gotoPage();
+
+        page.setNecessaryLabel("Essential").setPreferencesLabel("Personalization").setStatisticsLabel("Analytics")
+            .setMarketingLabel("Advertising").setActiveCookieTypes("necessary", "statistics");
+
+        page.clickSave();
     }
 }

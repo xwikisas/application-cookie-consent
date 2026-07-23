@@ -22,10 +22,10 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.xwiki.cookie-consent</groupId>
-    <artifactId>application-cookie-consent</artifactId>
+    <artifactId>application-cookie-consent-parent</artifactId>
     <version>2.0-SNAPSHOT</version>
   </parent>
-  <artifactId>application-cookie-consent-ui</artifactId>
+  <artifactId>application-cookie-consent</artifactId>
   <packaging>xar</packaging>
   <name>Cookie Consent Viewer Macro - UI</name>
   <description>Cookie consent popup with different configuration options.</description>
