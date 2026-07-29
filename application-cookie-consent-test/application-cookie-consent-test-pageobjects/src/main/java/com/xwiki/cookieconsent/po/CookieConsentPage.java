@@ -30,11 +30,10 @@ import org.openqa.selenium.support.ui.Select;
 import org.xwiki.test.ui.po.ViewPage;
 
 /**
- * Page Object for configuring the GDPR Cookie Consent extension (the {@code CookieConsent.ConfigurationClass} object on
- * {@code CookieConsent.WebHome}).
+ * Page Object for configuring the GDPR Cookie Consent application.
  *
  * @version $Id$
- * @since 1.0
+ * @since 2.0
  */
 public class CookieConsentPage extends ViewPage
 {
@@ -112,21 +111,10 @@ public class CookieConsentPage extends ViewPage
     @FindBy(id = "saveButton")
     private WebElement saveButton;
 
-    /**
-     * Opens the inline editor for the {@code CookieConsent.WebHome} document, where the {@code ConfigurationClass}
-     * object is edited.
-     *
-     * @return the page object for the configuration form
-     */
     public static CookieConsentPage gotoPage()
     {
         getUtil().gotoPage("CookieConsent", "WebHome", "view");
         return new CookieConsentPage();
-    }
-
-    public boolean isActive()
-    {
-        return "1".equals(new Select(activeSelect).getFirstSelectedOption().getAttribute("value"));
     }
 
     public CookieConsentPage setActive(boolean active)
@@ -135,20 +123,10 @@ public class CookieConsentPage extends ViewPage
         return this;
     }
 
-    public String getType()
-    {
-        return new Select(typeSelect).getFirstSelectedOption().getAttribute("value");
-    }
-
     public CookieConsentPage setType(String type)
     {
         new Select(typeSelect).selectByValue(type);
         return this;
-    }
-
-    public String getPosition()
-    {
-        return new Select(positionSelect).getFirstSelectedOption().getAttribute("value");
     }
 
     public CookieConsentPage setPosition(String position)
@@ -157,20 +135,10 @@ public class CookieConsentPage extends ViewPage
         return this;
     }
 
-    public String getAnimation()
-    {
-        return new Select(animationSelect).getFirstSelectedOption().getAttribute("value");
-    }
-
     public CookieConsentPage setAnimation(String animation)
     {
         new Select(animationSelect).selectByValue(animation);
         return this;
-    }
-
-    public String getBackgroundColor()
-    {
-        return backgroundColorInput.getAttribute("value");
     }
 
     public CookieConsentPage setBackgroundColor(String hexColor)
@@ -179,25 +147,9 @@ public class CookieConsentPage extends ViewPage
         return this;
     }
 
-    public String getForegroundColor()
-    {
-        return foregroundColorInput.getAttribute("value");
-    }
-
     public CookieConsentPage setForegroundColor(String hexColor)
     {
         setValue(foregroundColorInput, hexColor);
-        return this;
-    }
-
-    public String getOpacity()
-    {
-        return new Select(opacitySelect).getFirstSelectedOption().getAttribute("value");
-    }
-
-    public CookieConsentPage setOpacity(String opacity)
-    {
-        new Select(opacitySelect).selectByValue(opacity);
         return this;
     }
 
@@ -255,12 +207,6 @@ public class CookieConsentPage extends ViewPage
         return this;
     }
 
-    public CookieConsentPage setPreferencesScripts(String script)
-    {
-        setValue(preferencesScriptsArea, script);
-        return this;
-    }
-
     public CookieConsentPage setStatisticsScripts(String script)
     {
         setValue(statisticsScriptsArea, script);
@@ -308,11 +254,6 @@ public class CookieConsentPage extends ViewPage
         return result;
     }
 
-    /**
-     * Ticks/unticks the "Active cookie types" checkboxes so that exactly the given types end up checked.
-     *
-     * @param cookieTypes the values that must be checked, e.g. {@code "necessary", "statistics"}
-     */
     public CookieConsentPage setActiveCookieTypes(String... cookieTypes)
     {
         List<String> wanted = Arrays.asList(cookieTypes);

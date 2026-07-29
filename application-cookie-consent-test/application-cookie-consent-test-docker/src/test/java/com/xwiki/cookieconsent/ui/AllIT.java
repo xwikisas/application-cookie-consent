@@ -23,6 +23,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.xwiki.test.docker.junit5.UITest;
 
+/**
+ * All UI tests for the GDPR Cookie Consent application.
+ *
+ * @version $Id$
+ * @since 2.0
+ */
 @UITest
 public class AllIT
 {
