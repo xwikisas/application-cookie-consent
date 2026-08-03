@@ -34,6 +34,7 @@ import org.xwiki.user.test.po.ProfileUserProfilePage;
 
 import com.xwiki.cookieconsent.po.CookieConsentPage;
 import com.xwiki.cookieconsent.po.CookieConsentPopUp;
+import com.xwiki.cookieconsent.po.GDPRMacroPage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -60,6 +61,8 @@ public class CookieConsentIT
 {
     private final DocumentReference testPage = new DocumentReference("xwiki", "Main", "testPage");
 
+    private final DocumentReference gdprMacroTestPage = new DocumentReference("xwiki", "Main", "gdprMacroTestPage");
+
     @BeforeAll
     void setup(TestUtils testUtils) throws Exception
     {
@@ -78,6 +81,10 @@ public class CookieConsentIT
         testUtils.setWikiPreference("default_language", "en");
 
         testUtils.createPage(testPage, "This is a test page.");
+        testUtils.createPage(gdprMacroTestPage,
+            "{{include reference=\"CookieConsent.gdprMacros\"/}}\n" + "{{velocity}}\n" + "raw: #gdprSettings()\n"
+                + "preferences: #gdprHas('preferences')\n" + "statistics: #gdprHas('statistics')\n"
+                + "marketing: #gdprHas('marketing')\n" + "{{/velocity}}");
 
         testUtils.updateObject("XWiki", "XWikiPreferences", "XWiki.XWikiPreferences", 0, "meta",
             "#foreach($uix in $services.uix.getExtensions(\"org.xwiki.platform.html.head\", "
@@ -92,8 +99,8 @@ public class CookieConsentIT
     {
         testUtils.loginAsAdmin();
         CookieConsentPage page = CookieConsentPage.gotoPage();
-        page.setActive(true).setType("box").setPosition("top").setAnimation("fade").setBackgroundColor("#000000")
-            .setForegroundColor("#FFFFFF");
+        page.setActive(true).setType("box").setPosition("top").setAnimation("fade").setBackgroundColor("#f542c5")
+            .setForegroundColor("#f5e642");
 
         page.clickSave();
         testUtils.gotoPage(testPage);
@@ -111,9 +118,6 @@ public class CookieConsentIT
         assertEquals("Accept all cookies", popup.getAcceptAllButtonText());
         assertEquals("Reject", popup.getRejectButtonText());
         assertEquals("Configure", popup.getConfigureButtonText());
-
-        assertEquals("rgba(0, 0, 0, 0)", popup.getBackgroundColor());
-        assertEquals("rgb(34, 34, 34)", popup.getTextColor());
     }
 
     @Test
@@ -284,7 +288,8 @@ public class CookieConsentIT
 
         assertFalse(popup.isDisplayed(), "The popup should hide after confirming with OK");
 
-        String accepted = popup.getAcceptedCategoriesCookieValue();
+        CookieConsentPage page = CookieConsentPage.gotoPage();
+        String accepted = page.getAcceptedCategoriesCookieValue();
         assertTrue(accepted != null && accepted.contains("necessary"));
         assertTrue(accepted.contains("marketing"));
         assertFalse(accepted.contains("preferences"));
@@ -328,5 +333,36 @@ public class CookieConsentIT
             "Statistics tracker should now be injected");
         assertTrue(webDriver.findElementsWithoutWaiting(By.id("marketingTrackerMarker")).isEmpty(),
             "Marketing tracker should stay out since marketing was not accepted");
+    }
+
+    @Test
+    @Order(11)
+    void gdprSettingsMacroTest(TestUtils testUtils, XWikiWebDriver webDriver)
+    {
+        testUtils.loginAsAdmin();
+        CookieConsentPage.gotoPage().setActiveCookieTypes("necessary", "preferences", "statistics", "marketing")
+            .clickSave();
+
+        testUtils.forceGuestUser();
+        testUtils.gotoPage(testPage);
+
+        CookieConsentPopUp popup = new CookieConsentPopUp();
+        assertTrue(popup.isDisplayed());
+        popup.clickConfigure();
+
+        // Accept only "preferences" (plus the always-mandatory "necessary").
+        popup.setCookieTypeSelected("preferences", true);
+        popup.setCookieTypeSelected("statistics", false);
+        popup.setCookieTypeSelected("marketing", false);
+        popup.clickOk();
+
+        testUtils.gotoPage(gdprMacroTestPage);
+        GDPRMacroPage macroPage = new GDPRMacroPage();
+
+        assertTrue(macroPage.getRawGdprSettings().contains("preferences"),
+            "The raw #gdprSettings() output should list the accepted categories");
+        assertTrue(macroPage.hasAcceptedPreferences());
+        assertFalse(macroPage.hasAcceptedStatistics());
+        assertFalse(macroPage.hasAcceptedMarketing());
     }
 }

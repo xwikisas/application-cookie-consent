@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebElement;
 import org.xwiki.test.ui.po.BaseElement;
 
@@ -115,26 +114,10 @@ public class CookieConsentPopUp extends BaseElement
             .map(el -> el.getAttribute("id").replace("CookieButton_", "")).collect(Collectors.toList());
     }
 
-    public String getBackgroundColor()
-    {
-        return getDriver().findElementWithoutWaiting(POPUP).getCssValue("background-color");
-    }
-
-    public String getTextColor()
-    {
-        return getDriver().findElementWithoutWaiting(CONTENT).getCssValue("color");
-    }
-
     public void clickOk()
     {
         jsClick(getDriver().findElementWithoutWaiting(OK_BUTTON));
         getDriver().waitUntilElementDisappears(POPUP);
-    }
-
-    public String getAcceptedCategoriesCookieValue()
-    {
-        Cookie cookie = getDriver().manage().getCookieNamed("gdprSettings");
-        return cookie == null ? null : cookie.getValue();
     }
 
     public boolean isActive()

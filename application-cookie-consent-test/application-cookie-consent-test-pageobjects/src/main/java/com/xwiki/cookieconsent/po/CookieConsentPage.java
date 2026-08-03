@@ -19,11 +19,11 @@
  */
 package com.xwiki.cookieconsent.po;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
@@ -57,9 +57,6 @@ public class CookieConsentPage extends ViewPage
     @FindBy(id = FIELD_PREFIX + "foregroundColor")
     private WebElement foregroundColorInput;
 
-    @FindBy(id = FIELD_PREFIX + "opacity")
-    private WebElement opacitySelect;
-
     @FindBy(id = FIELD_PREFIX + "buttonText")
     private WebElement buttonTextArea;
 
@@ -86,9 +83,6 @@ public class CookieConsentPage extends ViewPage
 
     @FindBy(id = FIELD_PREFIX + "marketingInfoBox")
     private WebElement marketingInfoBoxArea;
-
-    @FindBy(id = FIELD_PREFIX + "preferencesScripts")
-    private WebElement preferencesScriptsArea;
 
     @FindBy(id = FIELD_PREFIX + "statisticsScripts")
     private WebElement statisticsScriptsArea;
@@ -243,17 +237,6 @@ public class CookieConsentPage extends ViewPage
         return this;
     }
 
-    public List<String> getActiveCookieTypes()
-    {
-        List<String> result = new ArrayList<>();
-        for (WebElement checkbox : getActiveCookieTypeCheckboxes()) {
-            if (checkbox.isSelected()) {
-                result.add(checkbox.getAttribute("value"));
-            }
-        }
-        return result;
-    }
-
     public CookieConsentPage setActiveCookieTypes(String... cookieTypes)
     {
         List<String> wanted = Arrays.asList(cookieTypes);
@@ -267,13 +250,16 @@ public class CookieConsentPage extends ViewPage
         return this;
     }
 
-    /**
-     * Saves the configuration and returns the resulting view page.
-     */
     public ViewPage clickSave()
     {
         saveButton.click();
         return new ViewPage();
+    }
+
+    public String getAcceptedCategoriesCookieValue()
+    {
+        Cookie cookie = getDriver().manage().getCookieNamed("gdprSettings");
+        return cookie == null ? null : cookie.getValue();
     }
 
     private List<WebElement> getActiveCookieTypeCheckboxes()
