@@ -60,8 +60,8 @@ $services.localization.render('cookieConsent.administration.description.intro')
   ####
   ##Language objects management start
   ##
-  #set ($defaultLanguage = 'en')
-  #set ($supportedLang = 'en')
+  #set ($defaultLanguage = $xwiki.getDocument('XWiki.XWikiPreferences').getObject('XWiki.XWikiPreferences').getProperty('default_language').value)
+  #set ($supportedLang = $xwiki.getDocument('XWiki.XWikiPreferences').getObject('XWiki.XWikiPreferences').getProperty('languages').value)
   ##
   #set ($settingsDocObjects = $settingsDoc.getObjects('CookieConsent.ConfigurationClass'))
   #set ($crtLangObject = $settingsDoc.getObject('CookieConsent.ConfigurationClass', 'lang', "${xcontext.locale}"))

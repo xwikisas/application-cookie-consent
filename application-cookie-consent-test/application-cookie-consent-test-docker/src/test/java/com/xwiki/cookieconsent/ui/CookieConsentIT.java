@@ -73,6 +73,8 @@ public class CookieConsentIT
         PreferencesEditPage preferencesEditPage = preferencesPage.editPreferences();
         preferencesEditPage.setAdvancedUserType();
         preferencesEditPage.clickSaveAndView();
+        testUtils.setWikiPreference("multilingual", "true");
+        testUtils.setWikiPreference("languages", "de,en,fr,it");
         testUtils.setWikiPreference("default_language", "en");
 
         testUtils.createPage(testPage, "This is a test page.");

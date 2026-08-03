@@ -29,6 +29,9 @@ import org.xwiki.test.ui.po.BaseElement;
 
 /**
  * Page Object for the Cookie Consent accept/decline/configure popup.
+ *
+ * @version $Id$
+ * @since 2.0
  */
 public class CookieConsentPopUp extends BaseElement
 {
