@@ -26,7 +26,7 @@ import org.xwiki.test.ui.po.ViewPage;
  * Page Object for a page that content GDPR Macros.
  *
  * @version $Id$
- * @since 3.1
+ * @since 2.0
  */
 public class GDPRMacroPage extends ViewPage
 {
