@@ -23,7 +23,7 @@
   <parent>
     <groupId>com.xwiki.cookie-consent</groupId>
     <artifactId>application-cookie-consent-parent</artifactId>
-    <version>2.0</version>
+    <version>2.0.1-SNAPSHOT</version>
   </parent>
   <packaging>pom</packaging>
   <artifactId>application-cookie-consent-test</artifactId>
